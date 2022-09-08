@@ -1,0 +1,49 @@
+{
+  "categories": [
+    {
+      "title": "Middeleeuwen",
+      "periodStart": 1000,
+      "periodEnd": 1450
+    },
+    {
+      "title": "Renaissance",
+      "periodStart": 1450,
+      "periodEnd": 1600
+    },
+    {
+      "title": "Barok en Rococo",
+      "periodStart": 1600,
+      "periodEnd": 1750
+    },
+    {
+      "title": "Romantiek",
+      "periodStart": 1780,
+      "periodEnd": 1880
+    },
+    {
+      "title": "Realisme",
+      "periodStart": 1830,
+      "periodEnd": 1870
+    },
+    {
+      "title": "Classicisme",
+      "periodStart": 1750,
+      "periodEnd": 1850
+    },
+    {
+      "title": "Impressionisme",
+      "periodStart": 1860,
+      "periodEnd": 1890
+    },
+    {
+      "title": "Moderne kunst",
+      "periodStart": 1890,
+      "periodEnd": 1970
+    },
+    {
+      "title": "Postmoderne kunst",
+      "periodStart": 1970,
+      "periodEnd": 2022
+    }
+  ]
+}

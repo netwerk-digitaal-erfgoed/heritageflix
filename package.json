@@ -2,12 +2,22 @@
   "private": true,
   "scripts": {
     "build": "nuxt build",
-    "dev": "nuxt dev",
+    "dev": "nuxt dev --port=3051",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "story:dev": "histoire dev",
+    "story:build": "histoire build",
+    "story:preview": "histoire preview"
+  },
+  "dependencies": {
+    "@heroicons/vue": "^2.0.10",
+    "@nuxtjs/tailwindcss": "^5.3.2",
+    "nuxt": "3.0.0-rc.9"
   },
   "devDependencies": {
-    "nuxt": "3.0.0-rc.9"
+    "@histoire/plugin-nuxt": "^0.10.7",
+    "@histoire/plugin-vue": "^0.10.7",
+    "histoire": "^0.10.7"
   }
 }
