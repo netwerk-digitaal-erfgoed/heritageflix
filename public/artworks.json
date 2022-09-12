@@ -1,0 +1,48 @@
+{
+  "artworks": [
+    {
+      "artist": "Jean-Honoré Fragonard",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla volutpat auctor bibendum. Aliquam et lacus urna. Pellentesque lobortis quam non tortor malesuada, id luctus nunc tincidunt. Curabitur malesuada ipsum a rutrum lobortis. Nam tincidunt lacus nec odio porttitor, ultricies interdum sapien ullamcorper. Donec nec mauris nibh. Nulla rhoncus fringilla tellus, in posuere neque lacinia vitae.",
+      "digitalObjectURL": "https://www.artsalonholland.nl/schilderkunst-rococo/jean-honore-fragonard-de-schommel",
+      "id": 1,
+      "image": "https://picsum.photos/600/860",
+      "museum": "Rijksmuseum",
+      "museumURL": "https://www.rijksmuseum.nl/nl",
+      "period": "1877",
+      "title": "Seine Fishing in Kazusa Province"
+    },
+    {
+      "artist": "Jean-Honoré Fragonard",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla volutpat auctor bibendum. Aliquam et lacus urna. Pellentesque lobortis quam non tortor malesuada, id luctus nunc tincidunt. Curabitur malesuada ipsum a rutrum lobortis. Nam tincidunt lacus nec odio porttitor, ultricies interdum sapien ullamcorper. Donec nec mauris nibh. Nulla rhoncus fringilla tellus, in posuere neque lacinia vitae.",
+      "digitalObjectURL": "https://www.artsalonholland.nl/schilderkunst-rococo/jean-honore-fragonard-de-schommel",
+      "id": 2,
+      "image": "https://picsum.photos/600/860",
+      "museum": "Rijksmuseum",
+      "museumURL": "https://www.rijksmuseum.nl/nl",
+      "period": "1877",
+      "title": "De lictors brengen Brutus de lichamen van zijn zonen"
+    },
+    {
+      "artist": "Jean-Honoré Fragonard",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla volutpat auctor bibendum. Aliquam et lacus urna. Pellentesque lobortis quam non tortor malesuada, id luctus nunc tincidunt. Curabitur malesuada ipsum a rutrum lobortis. Nam tincidunt lacus nec odio porttitor, ultricies interdum sapien ullamcorper. Donec nec mauris nibh. Nulla rhoncus fringilla tellus, in posuere neque lacinia vitae.",
+      "digitalObjectURL": "https://www.artsalonholland.nl/schilderkunst-rococo/jean-honore-fragonard-de-schommel",
+      "id": 3,
+      "image": "https://picsum.photos/600/860",
+      "museum": "Rijksmuseum",
+      "museumURL": "https://www.rijksmuseum.nl/nl",
+      "period": "1877",
+      "title": "Stilleven met gouden brasem"
+    },
+    {
+      "artist": "Jean-Honoré Fragonard",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla volutpat auctor bibendum. Aliquam et lacus urna. Pellentesque lobortis quam non tortor malesuada, id luctus nunc tincidunt. Curabitur malesuada ipsum a rutrum lobortis. Nam tincidunt lacus nec odio porttitor, ultricies interdum sapien ullamcorper. Donec nec mauris nibh. Nulla rhoncus fringilla tellus, in posuere neque lacinia vitae.",
+      "digitalObjectURL": "https://www.artsalonholland.nl/schilderkunst-rococo/jean-honore-fragonard-de-schommel",
+      "id": 4,
+      "image": "https://picsum.photos/600/860",
+      "museum": "Rijksmuseum",
+      "museumURL": "https://www.rijksmuseum.nl/nl",
+      "period": "1877",
+      "title": "Napoleon over de Alpen"
+    }
+  ]
+}

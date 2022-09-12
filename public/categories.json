@@ -1,49 +1,76 @@
 {
   "categories": [
     {
-      "title": "Middeleeuwen",
-      "periodStart": 1000,
-      "periodEnd": 1450
+      "id": 1,
+      "image": "https://picsum.photos/300/300",
+      "numberOfArtworks": 4,
+      "period": "1000 - 1450",
+      "slug": "middeleeuwen",
+      "title": "Middeleeuwen"
     },
     {
-      "title": "Renaissance",
-      "periodStart": 1450,
-      "periodEnd": 1600
+      "id": 2,
+      "image": "https://picsum.photos/300/300",
+      "numberOfArtworks": 4,
+      "period": "1450 - 1600",
+      "slug": "renaissance",
+      "title": "Renaissance"
     },
     {
-      "title": "Barok en Rococo",
-      "periodStart": 1600,
-      "periodEnd": 1750
+      "id": 3,
+      "image": "https://picsum.photos/300/300",
+      "numberOfArtworks": 4,
+      "period": "1600 - 1750",
+      "slug": "barok-en-rococo",
+      "title": "Barok en Rococo"
     },
     {
-      "title": "Romantiek",
-      "periodStart": 1780,
-      "periodEnd": 1880
+      "id": 4,
+      "image": "https://picsum.photos/300/300",
+      "numberOfArtworks": 4,
+      "period": "1780 - 1880",
+      "slug": "romantiek",
+      "title": "Romantiek"
     },
     {
-      "title": "Realisme",
-      "periodStart": 1830,
-      "periodEnd": 1870
+      "id": 5,
+      "image": "https://picsum.photos/300/300",
+      "numberOfArtworks": 4,
+      "period": "1830 - 1870",
+      "slug": "realisme",
+      "title": "Realisme"
     },
     {
-      "title": "Classicisme",
-      "periodStart": 1750,
-      "periodEnd": 1850
+      "id": 6,
+      "image": "https://picsum.photos/300/300",
+      "numberOfArtworks": 4,
+      "period": "1750 - 1850",
+      "slug": "classicisme",
+      "title": "Classicisme"
     },
     {
-      "title": "Impressionisme",
-      "periodStart": 1860,
-      "periodEnd": 1890
+      "id": 7,
+      "image": "https://picsum.photos/300/300",
+      "numberOfArtworks": 4,
+      "period": "1860 - 1890",
+      "slug": "impressionisme",
+      "title": "Impressionisme"
     },
     {
-      "title": "Moderne kunst",
-      "periodStart": 1890,
-      "periodEnd": 1970
+      "id": 8,
+      "image": "https://picsum.photos/300/300",
+      "numberOfArtworks": 4,
+      "period": "1890 - 1970",
+      "slug": "moderne-kunst",
+      "title": "Moderne kunst"
     },
     {
-      "title": "Postmoderne kunst",
-      "periodStart": 1970,
-      "periodEnd": 2022
+      "id": 9,
+      "image": "https://picsum.photos/300/300",
+      "numberOfArtworks": 4,
+      "period": "1970 - 2022",
+      "slug": "postmoderne-kunst",
+      "title": "Postmoderne kunst"
     }
   ]
 }
