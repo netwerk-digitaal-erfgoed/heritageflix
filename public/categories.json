@@ -2,7 +2,7 @@
   "categories": [
     {
       "id": 1,
-      "image": "https://picsum.photos/300/300",
+      "image": "https://picsum.photos/300?random=1",
       "numberOfArtworks": 4,
       "period": "1000 - 1450",
       "slug": "middeleeuwen",
@@ -10,7 +10,7 @@
     },
     {
       "id": 2,
-      "image": "https://picsum.photos/300/300",
+      "image": "https://picsum.photos/300?random=2",
       "numberOfArtworks": 4,
       "period": "1450 - 1600",
       "slug": "renaissance",
@@ -18,7 +18,7 @@
     },
     {
       "id": 3,
-      "image": "https://picsum.photos/300/300",
+      "image": "https://picsum.photos/300?random=3",
       "numberOfArtworks": 4,
       "period": "1600 - 1750",
       "slug": "barok-en-rococo",
@@ -26,7 +26,7 @@
     },
     {
       "id": 4,
-      "image": "https://picsum.photos/300/300",
+      "image": "https://picsum.photos/300?random=4",
       "numberOfArtworks": 4,
       "period": "1780 - 1880",
       "slug": "romantiek",
@@ -34,7 +34,7 @@
     },
     {
       "id": 5,
-      "image": "https://picsum.photos/300/300",
+      "image": "https://picsum.photos/300?random=5",
       "numberOfArtworks": 4,
       "period": "1830 - 1870",
       "slug": "realisme",
@@ -42,7 +42,7 @@
     },
     {
       "id": 6,
-      "image": "https://picsum.photos/300/300",
+      "image": "https://picsum.photos/300?random=6",
       "numberOfArtworks": 4,
       "period": "1750 - 1850",
       "slug": "classicisme",
@@ -50,7 +50,7 @@
     },
     {
       "id": 7,
-      "image": "https://picsum.photos/300/300",
+      "image": "https://picsum.photos/300?random=7",
       "numberOfArtworks": 4,
       "period": "1860 - 1890",
       "slug": "impressionisme",
@@ -58,7 +58,7 @@
     },
     {
       "id": 8,
-      "image": "https://picsum.photos/300/300",
+      "image": "https://picsum.photos/300?random=8",
       "numberOfArtworks": 4,
       "period": "1890 - 1970",
       "slug": "moderne-kunst",
@@ -66,7 +66,7 @@
     },
     {
       "id": 9,
-      "image": "https://picsum.photos/300/300",
+      "image": "https://picsum.photos/300?random=9",
       "numberOfArtworks": 4,
       "period": "1970 - 2022",
       "slug": "postmoderne-kunst",
