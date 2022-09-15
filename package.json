@@ -13,11 +13,14 @@
   "dependencies": {
     "@heroicons/vue": "^2.0.10",
     "@nuxtjs/tailwindcss": "^5.3.2",
-    "nuxt": "3.0.0-rc.9"
+    "@pinia/nuxt": "^0.4.2",
+    "nuxt": "3.0.0-rc.9",
+    "sass": "^1.54.9"
   },
   "devDependencies": {
     "@histoire/plugin-nuxt": "^0.10.7",
     "@histoire/plugin-vue": "^0.10.7",
-    "histoire": "^0.10.7"
+    "histoire": "^0.10.7",
+    "vite-svg-loader": "^3.6.0"
   }
 }
