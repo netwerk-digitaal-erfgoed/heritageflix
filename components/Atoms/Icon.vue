@@ -1,5 +1,5 @@
 <template>
-  <i class="h-10 w-10 flex justify-center items-center">
+  <i class="h-11 w-11 flex justify-center items-center">
     <component :is="icon" />
   </i>
 </template>
