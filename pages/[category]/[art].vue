@@ -39,12 +39,25 @@
 
 <script setup lang="ts">
   import { useTransitionStore } from '@/stores/transition';
+  import { useCategoriesStore } from "@/stores/categories";
+  import { useArtworkStore } from "@/stores/artworks";
+  import { useRoute } from "vue-router";
   import {storeToRefs} from 'pinia';
 
+  // Get the transition needed for the animations
   const store = useTransitionStore();
+  const route = useRoute();
   const { transition } = storeToRefs(store);
-  const activeRoute = useActiveRoute();
-  const currentArt = parseInt(activeRoute.params.art as string);
+
+  // Find the category and artwork
+  const { findCategoryBySlug } = useCategoriesStore();
+  const { findArtworkById } = useArtworkStore();
+
+  // TODO: We should let the store handle the looking up of category
+  const { category: currentCategory, art: currentArt } = route.params as unknown as Params
+  const category = findCategoryBySlug(currentCategory);
+  const artwork = findArtworkById(currentArt, category?.id);
+  console.warn(artwork)
 
   definePageMeta({
     pageTransition: {
@@ -53,21 +66,22 @@
       duration: 1000
     }
   });
+  const newParams = { category: category.slug };
 
+  // new Paths
   const homePath = {name: 'index'};
-  const categoryPath = {name: 'category', params: { category: activeRoute.params.category }};
-  const prevArtwork = {name: activeRoute.name, params: { ...activeRoute.params, art: currentArt - 1 }};
-  const nextArtwork = {name: activeRoute.name, params: { ...activeRoute.params, art: currentArt + 1 }};
+  const categoryPath = {name: 'category', params: { category: category.slug }};
+  const prevArtwork = {name: route.name, params: { ...newParams , art: artwork?.id - 1 }};
+  const nextArtwork = {name: route.name, params: { ...newParams, art: artwork?.id + 1 }};
 </script>
 
 <style scoped lang="scss">
-.header {
-  margin-top: 2rem;
-  height: 3rem;
-}
+  .header {
+    height: 3rem;
+  }
 
-.placeholder {
-  height: 54rem;
-}
+  .placeholder {
+    height: 54rem;
+  }
 
 </style>

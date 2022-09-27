@@ -5,21 +5,22 @@
 </template>
 
 <script setup>
-import { useCategoriesStore } from "~/stores/categories";
-import { useArtworksStore } from "~/stores/artworks";
+import { useCategoriesStore } from "@/stores/categories";
+import { useArtworkStore } from "~/stores/artworks";
 
-const categoriesStore = useCategoriesStore();
-const artworksStore = useArtworksStore();
+const { upsertCategory } = useCategoriesStore();
+const { upsertArtwork } = useArtworkStore();
+
 
 const { categories } = await fetch(
   `http://localhost:3051/categories.json`
 ).then((r) => r.json());
-const { artworks } = await fetch(`http://localhost:3051/artworks.json`).then(
+const { artworks } = await fetch(`http://localhost:3051/categories/1.json`).then(
   (r) => r.json()
 );
 
-categoriesStore.$patch(categories);
-artworksStore.$patch(artworks);
+categories.forEach(cat => upsertCategory(cat))
+artworks.forEach(art => upsertArtwork(art))
 </script>
 
 <style lang="scss">

@@ -8,6 +8,10 @@ export default <Config>{
       'white': '#FFFFFF',
       'blue': '#F2F5FF'
     },
+    fontFamily: {
+      poppins: ['Poppins'],
+      roboto: ['Roboto']
+    },
     container: {
       center: true,
       padding: '0.75rem',
@@ -29,5 +33,10 @@ export default <Config>{
       },
     }
   },
-  plugins: []
+  plugins: [],
+  safelist: [
+    {
+      pattern: /^grid-cols-/
+    },
+  ]
 }

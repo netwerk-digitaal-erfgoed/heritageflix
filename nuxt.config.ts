@@ -8,10 +8,17 @@ export default defineNuxtConfig({
     '@/assets/scss/transitions.scss'
   ],
   modules: [
+    '@nuxtjs/google-fonts',
     '@nuxtjs/tailwindcss',
     '@pinia/nuxt'
   ],
   vite: {
     plugins: [svgLoader()]
+  },
+  googleFonts: {
+    families: {
+      Roboto: true,
+      Poppins: true
+    }
   }
 });

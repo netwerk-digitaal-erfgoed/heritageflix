@@ -21,6 +21,7 @@
   "devDependencies": {
     "@histoire/plugin-nuxt": "^0.10.7",
     "@histoire/plugin-vue": "^0.10.7",
+    "@nuxtjs/google-fonts": "^3.0.0-0",
     "histoire": "^0.10.7",
     "vite-svg-loader": "^3.6.0"
   }

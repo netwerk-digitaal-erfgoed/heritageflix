@@ -5,7 +5,7 @@
       :slider-props="categoriesSliderProps"
     >
       <SplideSlide
-        v-for="category in categoriesStore.$state"
+        v-for="category in categories"
         :key="category.id"
         class="category-slide"
       >
@@ -29,7 +29,7 @@
   <section class="py-24">
     <div class="overflow-hidden px-3 -mt-16">
       <div
-        v-for="category in categoriesStore.$state"
+        v-for="category in categories"
         :key="category.id"
         class="flex justify-center mt-16"
       >
@@ -55,7 +55,7 @@
             :slider-props="artworksSliderProps"
           >
             <SplideSlide
-              v-for="artwork in artworksStore.$state"
+              v-for="artwork in artworks"
               :key="artwork.id"
             >
               <NuxtLink
@@ -81,11 +81,11 @@
 
 <script setup lang="ts">
 import { SplideSlide } from "@splidejs/vue-splide";
-import { useArtworksStore } from "~/stores/artworks";
+import { useArtworkStore } from "~/stores/artworks";
 import { useCategoriesStore } from "~/stores/categories";
 
-const categoriesStore = useCategoriesStore();
-const artworksStore = useArtworksStore();
+const { categories } = useCategoriesStore();
+const { artworks } = useArtworkStore();
 
 const categoriesSliderProps = {
   gap: "1.25rem",
