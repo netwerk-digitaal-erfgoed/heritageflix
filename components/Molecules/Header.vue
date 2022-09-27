@@ -1,6 +1,6 @@
 <template>
   <div class="grid grid-cols-12 gap-x-2 w-full">
-    <AtomsNavigation
+    <MoleculesIconNavigation
       v-if="showHome"
       class="col-span-1 col-start-1 flex justify-end"
       name="logo"
@@ -8,7 +8,7 @@
       :direction="transition"
     />
     <slot class="col-span-8 col-start-2 flex justify-center" />
-    <AtomsNavigation
+    <MoleculesIconNavigation
       v-if="showCategory"
       class="col-span-1 col-start-10"
       name="close"

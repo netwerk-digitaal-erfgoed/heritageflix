@@ -1,5 +1,5 @@
 <template>
-  <NuxtLink :to="path">
+  <AtomsNavigation :to="path">
     <div class="teaser">
       <div class="background" :style="cssStyle" />
       <div class="description">
@@ -16,7 +16,7 @@
 
       </div>
     </div>
-  </NuxtLink>
+  </AtomsNavigation>
 </template>
 
 <script setup lang="ts">

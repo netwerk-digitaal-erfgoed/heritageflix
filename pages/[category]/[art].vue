@@ -1,13 +1,13 @@
 <template>
   <main class="absolute z-10 bg-white w-full overflow-hidden border-blue" :class="transition">
     <div class="header w-full flex justify-between p-4">
-      <AtomsNavigation name="logo" :to=homePath direction="down" />
+      <MoleculesIconNavigation name="logo" :to=homePath />
       [CATEGORY]
-      <AtomsNavigation name="close" :to="categoryPath" direction="down"/>
+      <MoleculesIconNavigation name="close" :to="categoryPath" direction="down"/>
     </div>
     <div class="grid grid-cols-12">
       <div class="col-span-1 flex justify-center items-center">
-        <AtomsNavigation name="arrowLeft" :to="prevArtwork" direction="right" v-if="currentArt > 1"/>
+        <MoleculesIconNavigation name="arrowLeft" :to="prevArtwork" direction="right" v-if="currentArt > 1"/>
       </div>
       <div class="col-span-10 flex flex-col justify-center items-center">
         <div class="placeholder w-full bg-blue flex justify-center items-center">
@@ -31,7 +31,7 @@
         </div>
       </div>
       <div class="col-span-1 flex justify-center items-center">
-        <AtomsNavigation name="arrowRight" :to="nextArtwork" direction="left" v-if="currentArt < 4" />
+        <MoleculesIconNavigation name="arrowRight" :to="nextArtwork" direction="left" v-if="currentArt < 4" />
       </div>
     </div>
   </main>

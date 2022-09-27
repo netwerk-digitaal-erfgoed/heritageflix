@@ -10,19 +10,14 @@
           :key="category.id"
           class="category-slide"
         >
-          <NuxtLink
-              :to="{
-                name: 'category',
-                params: { category: category.slug },
-              }"
-            >
-              <MoleculesTeaser
-                :title="category.title"
-                :subtitle="category.period"
-                :imgSrc="category.image"
-                type="category"
-              />
-            </NuxtLink>
+          <AtomsNavigation :to="{ name: 'category', params: { category: category.slug } }">
+            <MoleculesTeaser
+              :title="category.title"
+              :subtitle="category.period"
+              :imgSrc="category.image"
+              type="category"
+            />
+          </AtomsNavigation>
         </SplideSlide>
       </OrganismsSlider>
     </section>
@@ -40,15 +35,9 @@
                 {{ category.title }} {{ category.period }}
               </div>
 
-              <NuxtLink
-                class="text-xl font-medium uppercase"
-                :to="{
-                  name: 'category',
-                  params: { category: category.slug },
-                }"
-              >
+              <AtomsNavigation class="text-xl font-medium uppercase" :to="{ name: 'category', params: { category: category.slug } }">
                 Toon alle
-              </NuxtLink>
+              </AtomsNavigation>
             </div>
 
             <OrganismsSlider
