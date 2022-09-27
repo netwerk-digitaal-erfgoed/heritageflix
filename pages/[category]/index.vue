@@ -1,24 +1,54 @@
 <template>
-  <div>
+  <main>
     <MoleculesHeader />
-    <div class="cover-image" :style="cssVars">
+    <section class="cover-image" :style="cssVars">
       <div class="flex flex-col justify-center items-center glass">
         <h1 class="text-white title">{{ category.title }}</h1>
         <h2 class="text-white title">{{ category.period }}</h2>
       </div>
-    </div>
-    <div class="grid grid-cols-12 w-full pt-6">
-      <div class="col-span-10 col-start-2 flex flex-wrap justify-start">
-        <AtomsArtworkTeaser v-for="item in artworks" :key="item.slug" :item="item" v-if="artworks.length" />
-        <!-- <MoleculesOverview :items="artworks" v-if="artworks.length" /> -->
-        <div v-else>No artworks</div>
+    </section>
+
+    <section class="py-24">
+      <div class="px-3">
+        <div class="flex justify-center">
+          <div class="w-10/12">
+            <div class="grid grid-cols-4 gap-x-12 gap-y-14">
+              <AtomsArtworkTeaser v-for="item in paginatedArtworks" :key="item.slug" :item="item" v-if="artworks.length" />
+              <div v-else>No artworks</div>
+            </div>
+
+            <div class="flex justify-center mt-12">
+              <vue-awesome-paginate
+                :total-items="artworks.length"
+                :current-page="1"
+                :items-per-page="artworksPerPage"
+                :max-pages-shown="3"
+                :on-click="goToPage"
+                :hide-prev-next-when-ends="true"
+              >
+                <template #prev-button>
+                  <AtomsIcon
+                    class="bg-blue text-black rounded-full"
+                    name="arrowLeft"
+                  />
+                </template>
+
+                <template #next-button>
+                  <AtomsIcon
+                    class="bg-blue text-black rounded-full"
+                    name="arrowRight"
+                  />
+                </template>
+              </vue-awesome-paginate>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
+    </section>
+  </main>
 </template>
 
 <script setup lang="ts">
-import { useRoute } from "vue-router";
 import { useCategoriesStore } from "@/stores/categories";
 import { useArtworkStore } from "@/stores/artworks";
 
@@ -43,6 +73,22 @@ const cssVars = computed(() => {
   }
 });
 
+// Pagination
+let currentPage = ref(1);
+const artworksPerPage = 16;
+
+const paginatedArtworks = computed(() =>
+  artworks.slice(
+    (currentPage.value - 1) * artworksPerPage,
+    currentPage.value * artworksPerPage
+  )
+);
+
+const goToPage = (page: number) => {
+  currentPage.value = page;
+};
+
+
 // Needed for transition to art page
 definePageMeta({
   pageTransition: {
@@ -65,5 +111,20 @@ definePageMeta({
   // @TODO: Move typography to a generic setup
   .title {
     font-size: 4.375rem;
+  }
+
+  .pagination-container {
+    display: flex;
+    column-gap: 44px;
+  }
+
+  :deep(.paginate-buttons) {
+    height: 2.75rem;
+    width: 2.75rem;
+    cursor: pointer;
+
+    &.active-page {
+      background-color: #f2f5ff;
+    }
   }
 </style>

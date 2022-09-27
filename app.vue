@@ -20,7 +20,7 @@ const { artworks } = await fetch(`http://localhost:3051/categories/1.json`).then
 );
 
 categories.forEach(cat => upsertCategory(cat))
-artworks.forEach(art => upsertArtwork(art))
+artworks.forEach(art => upsertArtwork(art, 1))
 </script>
 
 <style lang="scss">

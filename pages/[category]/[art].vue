@@ -41,7 +41,6 @@
   import { useTransitionStore } from '@/stores/transition';
   import { useCategoriesStore } from "@/stores/categories";
   import { useArtworkStore } from "@/stores/artworks";
-  import { useRoute } from "vue-router";
   import {storeToRefs} from 'pinia';
 
   // Get the transition needed for the animations

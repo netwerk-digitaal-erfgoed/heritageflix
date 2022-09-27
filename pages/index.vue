@@ -1,82 +1,74 @@
 <template>
-  <section>
-    <MoleculesSlider
-      class="categories-slider"
-      :slider-props="categoriesSliderProps"
-    >
-      <SplideSlide
-        v-for="category in categories"
-        :key="category.id"
-        class="category-slide"
+  <main>
+    <section>
+      <OrganismsSlider
+        class="categories-slider"
+        :slider-props="categoriesSliderProps"
       >
-        <NuxtLink
-          :to="{
-            name: 'category',
-            params: { category: category.slug },
-          }"
+        <SplideSlide
+          v-for="category in categories"
+          :key="category.id"
+          class="category-slide"
         >
-          <Teaser
-            :title="category.title"
-            :subtitle="category.period"
-            :imgSrc="category.image"
-            type="category"
-          />
-        </NuxtLink>
-      </SplideSlide>
-    </MoleculesSlider>
-  </section>
-
-  <section class="py-24">
-    <div class="overflow-hidden px-3 -mt-16">
-      <div
-        v-for="category in categories"
-        :key="category.id"
-        class="flex justify-center mt-16"
-      >
-        <div class="w-10/12">
-          <div class="flex justify-between items-center mb-9">
-            <div class="text-5xl uppercase">
-              {{ category.title }} {{ category.period }}
-            </div>
-
-            <NuxtLink
-              class="text-xl font-medium uppercase"
+          <NuxtLink
               :to="{
                 name: 'category',
                 params: { category: category.slug },
               }"
             >
-              Toon alle
+              <MoleculesTeaser
+                :title="category.title"
+                :subtitle="category.period"
+                :imgSrc="category.image"
+                type="category"
+              />
             </NuxtLink>
-          </div>
+        </SplideSlide>
+      </OrganismsSlider>
+    </section>
 
-          <MoleculesSlider
-            class="artworks-slider"
-            :slider-props="artworksSliderProps"
-          >
-            <SplideSlide
-              v-for="artwork in artworks"
-              :key="artwork.id"
-            >
+    <section class="py-24">
+      <div class="overflow-hidden px-3 -mt-16">
+        <div
+          v-for="category in categories"
+          :key="category.id"
+          class="flex justify-center mt-16"
+        >
+          <div class="w-10/12">
+            <div class="flex justify-between items-center mb-9">
+              <div class="text-5xl uppercase">
+                {{ category.title }} {{ category.period }}
+              </div>
+
               <NuxtLink
+                class="text-xl font-medium uppercase"
                 :to="{
-                  name: 'category-art',
-                  params: { category: category.slug, art: artwork.slug },
+                  name: 'category',
+                  params: { category: category.slug },
                 }"
               >
-                <Teaser
-                  :title="artwork.title"
-                  :subtitle="`${artwork.artist}, ${artwork.period}`"
+                Toon alle
+              </NuxtLink>
+            </div>
+
+            <OrganismsSlider
+              class="artworks-slider"
+              :slider-props="artworksSliderProps"
+            >
+              <SplideSlide v-for="artwork in slicedArtworks" :key="artwork.id">
+                <MoleculesTeaser
                   :imgSrc="artwork.image"
+                  :subtitle="`${artwork.artist}, ${artwork.period}`"
+                  :title="artwork.title"
                   type="artwork"
                 />
-              </NuxtLink>
-            </SplideSlide>
-          </MoleculesSlider>
+              </SplideSlide>
+            </OrganismsSlider>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </main>
 </template>
 
 <script setup lang="ts">
@@ -94,6 +86,8 @@ const categoriesSliderProps = {
 const artworksSliderProps = {
   gap: "4.5rem",
 };
+
+const slicedArtworks = computed(() => artworks.slice(0, 10));
 </script>
 
 <style scoped lang="scss">
