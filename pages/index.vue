@@ -1,7 +1,7 @@
 <template>
   <main>
     <section>
-      <OrganismsSlider
+      <MoleculesSlider
         class="categories-slider"
         :slider-props="categoriesSliderProps"
       >
@@ -10,16 +10,9 @@
           :key="category.id"
           class="category-slide"
         >
-          <AtomsNavigation :to="{ name: 'category', params: { category: category.slug } }">
-            <MoleculesTeaser
-              :title="category.title"
-              :subtitle="category.period"
-              :imgSrc="category.image"
-              type="category"
-            />
-          </AtomsNavigation>
+          <AtomsCategoryTeaser :category="category" />
         </SplideSlide>
-      </OrganismsSlider>
+      </MoleculesSlider>
     </section>
 
     <section class="py-24">
@@ -35,24 +28,28 @@
                 {{ category.title }} {{ category.period }}
               </div>
 
-              <AtomsNavigation class="text-xl font-medium uppercase" :to="{ name: 'category', params: { category: category.slug } }">
+              <AtomsNavigation
+                class="text-xl font-medium uppercase"
+                :to="{ name: 'category', params: { category: category.slug } }"
+              >
                 Toon alle
               </AtomsNavigation>
             </div>
 
-            <OrganismsSlider
+            <MoleculesSlider
               class="artworks-slider"
               :slider-props="artworksSliderProps"
             >
               <SplideSlide v-for="artwork in slicedArtworks" :key="artwork.id">
-                <MoleculesTeaser
-                  :imgSrc="artwork.image"
-                  :subtitle="`${artwork.artist}, ${artwork.period}`"
-                  :title="artwork.title"
-                  type="artwork"
+                <AtomsArtworkTeaser
+                  :artwork="artwork"
+                  :path="{
+                    name: 'category-art',
+                    params: { category: category.slug, art: artwork.id },
+                  }"
                 />
               </SplideSlide>
-            </OrganismsSlider>
+            </MoleculesSlider>
           </div>
         </div>
       </div>
@@ -70,10 +67,10 @@ const { artworks } = useArtworkStore();
 
 const categoriesSliderProps = {
   gap: "1.25rem",
-  padding: { right: "5%" },
+  padding: { right: "5%" }
 };
 const artworksSliderProps = {
-  gap: "4.5rem",
+  gap: "4.5rem"
 };
 
 const slicedArtworks = computed(() => artworks.slice(0, 10));
@@ -103,7 +100,8 @@ const slicedArtworks = computed(() => artworks.slice(0, 10));
 }
 
 .artworks-slider {
-  &.is-initialized, &.is-rendered {
+  &.is-initialized,
+  &.is-rendered {
     :deep(.splide__track) {
       overflow: visible;
     }

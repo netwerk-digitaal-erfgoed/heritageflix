@@ -12,35 +12,50 @@
       <div class="px-3">
         <div class="flex justify-center">
           <div class="w-10/12">
-            <div class="grid grid-cols-4 gap-x-12 gap-y-14">
-              <AtomsArtworkTeaser v-for="item in paginatedArtworks" :key="item.slug" :item="item" v-if="artworks.length" />
-              <div v-else>No artworks</div>
-            </div>
-
-            <div class="flex justify-center mt-12">
-              <vue-awesome-paginate
-                :total-items="artworks.length"
-                :current-page="1"
-                :items-per-page="artworksPerPage"
-                :max-pages-shown="3"
-                :on-click="goToPage"
-                :hide-prev-next-when-ends="true"
+            <template v-if="artworks.length">
+              <div
+                class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-x-12 gap-y-14"
               >
-                <template #prev-button>
-                  <AtomsIcon
-                    class="bg-blue text-black rounded-full"
-                    name="arrowLeft"
-                  />
-                </template>
+                <AtomsArtworkTeaser
+                  v-for="artwork in paginatedArtworks"
+                  :key="artwork.slug"
+                  :artwork="artwork"
+                  :path="{
+                    name: 'category-art',
+                    params: {
+                      category: route.params.category,
+                      art: artwork.id,
+                    },
+                  }"
+                />
+              </div>
 
-                <template #next-button>
-                  <AtomsIcon
-                    class="bg-blue text-black rounded-full"
-                    name="arrowRight"
-                  />
-                </template>
-              </vue-awesome-paginate>
-            </div>
+              <div class="flex justify-center mt-12">
+                <vue-awesome-paginate
+                  :total-items="artworks.length"
+                  :current-page="1"
+                  :items-per-page="artworksPerPage"
+                  :max-pages-shown="3"
+                  :on-click="goToPage"
+                  :hide-prev-next-when-ends="true"
+                >
+                  <template #prev-button>
+                    <AtomsIcon
+                      class="bg-blue text-black rounded-full"
+                      name="arrowLeft"
+                    />
+                  </template>
+
+                  <template #next-button>
+                    <AtomsIcon
+                      class="bg-blue text-black rounded-full"
+                      name="arrowRight"
+                    />
+                  </template>
+                </vue-awesome-paginate>
+              </div>
+            </template>
+            <div v-else>No artworks</div>
           </div>
         </div>
       </div>
@@ -55,6 +70,8 @@ import { useArtworkStore } from "@/stores/artworks";
 const { findCategoryBySlug } = useCategoriesStore();
 const { upsertArtwork, artworks } = useArtworkStore();
 
+const route = useRoute();
+
 // Load the category
 const currentCategory = useRoute().params.category as string;
 const category = findCategoryBySlug(currentCategory);
@@ -62,15 +79,17 @@ const category = findCategoryBySlug(currentCategory);
 // Load the artworks into the store
 // TODO: Replace with real data
 if (category) {
-  const data = await fetch(`http://localhost:3051/categories/${category.id}.json`).then(r => r.json());
-  data?.artworks?.forEach((art: Artwork) => upsertArtwork(art, category.id))
+  const data = await fetch(
+    `http://localhost:3051/categories/${category.id}.json`
+  ).then((r) => r.json());
+  data?.artworks?.forEach((art: Artwork) => upsertArtwork(art, category.id));
 }
 
 // css vars needed for the header image
 const cssVars = computed(() => {
   return {
-    backgroundImage: `url(${category.image}})`
-  }
+    backgroundImage: `url(${category.image}})`,
+  };
 });
 
 // Pagination
@@ -88,43 +107,42 @@ const goToPage = (page: number) => {
   currentPage.value = page;
 };
 
-
 // Needed for transition to art page
 definePageMeta({
   pageTransition: {
     name: "page",
     mode: "in-out",
     duration: 1000,
-  }
+  },
 });
 </script>
 
 <style scoped lang="scss">
-  .cover-image {
-    background-repeat: no-repeat;
-	  background-size: cover;
-    height: 595px;
-    width: 100%;
-    position: relative;
-  }
+.cover-image {
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 595px;
+  width: 100%;
+  position: relative;
+}
 
-  // @TODO: Move typography to a generic setup
-  .title {
-    font-size: 4.375rem;
-  }
+// @TODO: Move typography to a generic setup
+.title {
+  font-size: 4.375rem;
+}
 
-  .pagination-container {
-    display: flex;
-    column-gap: 44px;
-  }
+.pagination-container {
+  display: flex;
+  column-gap: 2.75rem;
+}
 
-  :deep(.paginate-buttons) {
-    height: 2.75rem;
-    width: 2.75rem;
-    cursor: pointer;
+:deep(.paginate-buttons) {
+  height: 2.75rem;
+  width: 2.75rem;
+  cursor: pointer;
 
-    &.active-page {
-      background-color: #f2f5ff;
-    }
+  &.active-page {
+    background-color: #f2f5ff;
   }
+}
 </style>

@@ -1,95 +1,102 @@
 <template>
   <AtomsNavigation :to="path">
     <div class="teaser">
-      <div class="background" :style="cssStyle" />
-      <div class="description">
-        <div class="flex justify-center items-center flex-col text-white glass">
-          <!-- @TODO: Discuss with Alexander, text is too big sometimes -->
-          <span class="text-center title">
-            {{ item.title }}
-          </span>
-          <span class="text-center subtitle">
-            {{ item.artist }}, {{ item.period }}
-          </span>
+      <div v-if="artwork.image" class="teaser-img-wrapper">
+        <img class="teaser-img" :src="artwork.image" />
+      </div>
+
+      <div class="teaser-body">
+        <div v-if="artwork.title" class="teaser-title">
+          {{ artwork.title }}
         </div>
 
+        <div v-if="artwork.artist || artwork.period" class="teaser-subtitle">
+          <template v-if="artwork.artist">
+            {{ artwork.artist }}
+          </template>
 
+          <template v-if="artwork.artist && artwork.period">,</template>
+
+          <template v-if="artwork.period">
+            {{ artwork.period }}
+          </template>
+        </div>
       </div>
     </div>
   </AtomsNavigation>
 </template>
 
 <script setup lang="ts">
-import { PropType } from 'vue';
+import { PropType } from "vue";
 
-const route = useRoute();
 const props = defineProps({
-  item: {
+  artwork: {
     type: Object as PropType<Artwork>,
-    required: true
-  }
+    required: true,
+  },
+  path: {
+    type: Object,
+    required: true,
+  },
 });
-
-const path = {
-  name: 'category-art',
-  params: {
-    category: route.params.category,
-    art: props.item.id
-  }
-};
-
-const cssStyle = computed(() => {
-  return {
-    backgroundImage: `url(${props.item.image}})`
-  }
-})
-
 </script>
 
 <style lang="scss" scoped>
-  .teaser {
-    width: 20rem;
-    height: 20rem;
-    margin: 0.3125rem;
-    position: relative;
-    display: inline-block;
-    overflow: hidden;
+.teaser {
+  position: relative;
+  width: 100%;
+  word-wrap: break-word;
+  overflow: hidden;
 
-    &:hover {
-      .background {
-        transform: scale(1.1);
-      }
+  &:hover {
+    .teaser-img {
+      transform: scale(1.1);
     }
   }
 
-  .background {
-    height: 100%;
-    width: 100%;
-    background-repeat: no-repeat;
-	  background-size: cover;
-    transition: all .5s;
+  &:before {
+    content: "";
+    display: block;
+    padding-top: 100%;
   }
+}
 
-  .description {
-    width: 100%;
-    position: absolute;
-    bottom: 2rem;
-  }
+.teaser-img-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
 
-  // @TODO: Fix the typography
-  .title {
-    font-family: 'Poppins';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 1.5rem;
-  }
+.teaser-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: 0.15s ease-in-out;
+}
 
-  .subtitle {
-    font-family: 'Poppins';
-    font-style: normal;
-    font-weight: 300;
-    font-size: 1rem;
-  }
+.teaser-body {
+  position: absolute;
+  left: 0;
+  bottom: 1.5rem;
+  width: 100%;
+  padding: 0.5rem 1.25rem;
+  background-color: rgba(0, 0, 0, 0.3);
+  color: #ffffff;
+  backdrop-filter: blur(0.25rem);
+}
 
+.teaser-title {
+  font-size: 1.5rem;
+  line-height: 1.25;
+  font-weight: 600;
+}
 
+.teaser-subtitle {
+  font-size: 1rem;
+  line-height: 1.43;
+  font-weight: 300;
+}
 </style>
