@@ -98,7 +98,7 @@ const artworksSliderProps = {
 
 <style scoped lang="scss">
 .categories-slider {
-  :deep .slider-track {
+  :deep(.slider-track) {
     background-color: #000000;
   }
 
@@ -110,31 +110,28 @@ const artworksSliderProps = {
     }
   }
 
-  :deep .splide__arrow {
-    &--prev {
-      left: 2rem;
-    }
+  :deep(.splide__arrow--prev) {
+    left: 2rem;
+  }
 
-    &--next {
-      right: 2rem;
-    }
+  :deep(.splide__arrow--next) {
+    right: 2rem;
   }
 }
 
 .artworks-slider {
-  :deep &.is-initialized .splide__track,
-  :deep &.is-rendered .splide__track {
-    overflow: visible;
+  &.is-initialized, &.is-rendered {
+    :deep(.splide__track) {
+      overflow: visible;
+    }
   }
 
-  :deep .splide__arrow {
-    &--prev {
-      left: -4.75rem;
-    }
+  :deep(.splide__arrow--prev) {
+    left: -4.75rem;
+  }
 
-    &--next {
-      right: -4.75rem;
-    }
+  :deep(.splide__arrow--next) {
+    right: -4.75rem;
   }
 }
 </style>

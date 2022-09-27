@@ -35,25 +35,25 @@ const splideProps = Object.assign(
 </script>
 
 <style scoped lang="scss">
-:deep .splide__arrow {
+:deep(.splide__arrow) {
   width: 2.75rem;
   height: 2.75rem;
   background: #f2f5ff;
   opacity: 1 !important;
 
-  &:disabled {
-    display: none;
-  }
-
-  &--prev {
-    svg {
-      transform: none;
-    }
-  }
-
   svg {
     width: 1.25rem;
     height: 0.875rem;
+  }
+}
+
+:deep(.splide__arrow:disabled) {
+  display: none;
+}
+
+:deep(.splide__arrow--prev) {
+  svg {
+    transform: none;
   }
 }
 </style>
