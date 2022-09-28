@@ -68,10 +68,6 @@ const nextArtwork = { name: route.name, params: { ...newParams, art: artwork?.id
 </script>
 
 <style scoped lang="scss">
-.header {
-  height: 3rem;
-}
-
 .placeholder {
   height: 54rem;
 }
