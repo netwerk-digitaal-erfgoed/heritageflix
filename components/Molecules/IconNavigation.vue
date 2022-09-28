@@ -1,6 +1,6 @@
 <template>
   <AtomsNavigation :to="to" :direction="direction">
-    <AtomsIcon :name="name" class="h-10 w-10 bg-blue text-black rounded-full" />
+    <AtomsIcon :name="name" class="h-11 w-11 bg-blue text-black rounded-full" />
   </AtomsNavigation>
 </template>
 

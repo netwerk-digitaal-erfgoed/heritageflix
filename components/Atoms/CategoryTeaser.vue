@@ -24,7 +24,7 @@ import { PropType } from "vue";
 const props = defineProps({
   category: {
     type: Object as PropType<Category>,
-    required: true,
+    required: true
   },
 });
 

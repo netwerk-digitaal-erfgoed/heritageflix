@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <div>
     <MoleculesHeader />
     <section class="cover-image" :style="cssVars">
       <div class="flex flex-col justify-center items-center glass">
@@ -12,7 +12,7 @@
       <div class="px-3">
         <div class="flex justify-center">
           <div class="w-10/12">
-            <template v-if="artworks.length">
+            <template v-if="totalItems">
               <div
                 class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-x-12 gap-y-14"
               >
@@ -20,7 +20,7 @@
                   v-for="artwork in paginatedArtworks"
                   :key="artwork.slug"
                   :artwork="artwork"
-                  :path="{
+                  :to="{
                     name: 'category-art',
                     params: {
                       category: route.params.category,
@@ -32,7 +32,7 @@
 
               <div class="flex justify-center mt-12">
                 <vue-awesome-paginate
-                  :total-items="artworks.length"
+                  :total-items="totalItems"
                   :current-page="1"
                   :items-per-page="artworksPerPage"
                   :max-pages-shown="3"
@@ -41,14 +41,14 @@
                 >
                   <template #prev-button>
                     <AtomsIcon
-                      class="bg-blue text-black rounded-full"
+                      class="h-11 w-11 bg-blue text-black rounded-full"
                       name="arrowLeft"
                     />
                   </template>
 
                   <template #next-button>
                     <AtomsIcon
-                      class="bg-blue text-black rounded-full"
+                      class="h-11 w-11 bg-blue text-black rounded-full"
                       name="arrowRight"
                     />
                   </template>
@@ -60,20 +60,19 @@
         </div>
       </div>
     </section>
-  </main>
+  </div>
 </template>
 
 <script setup lang="ts">
-import { useCategoriesStore } from "@/stores/categories";
+import { useCategoryStore } from "@/stores/categories";
 import { useArtworkStore } from "@/stores/artworks";
 
-const { findCategoryBySlug } = useCategoriesStore();
-const { upsertArtwork, artworks } = useArtworkStore();
-
-const route = useRoute();
+const { findCategoryBySlug } = useCategoryStore();
+const { upsertArtwork, countByCategory, findArtworksByCategory } = useArtworkStore();
 
 // Load the category
-const currentCategory = useRoute().params.category as string;
+const route = useRoute();
+const currentCategory = route.params.category as string;
 const category = findCategoryBySlug(currentCategory);
 
 // Load the artworks into the store
@@ -97,7 +96,7 @@ let currentPage = ref(1);
 const artworksPerPage = 16;
 
 const paginatedArtworks = computed(() =>
-  artworks.slice(
+  findArtworksByCategory(category.id,
     (currentPage.value - 1) * artworksPerPage,
     currentPage.value * artworksPerPage
   )
@@ -107,13 +106,15 @@ const goToPage = (page: number) => {
   currentPage.value = page;
 };
 
+const totalItems = countByCategory(category.id);
+
 // Needed for transition to art page
 definePageMeta({
   pageTransition: {
     name: "page",
     mode: "in-out",
-    duration: 1000,
-  },
+    duration: 1000
+  }
 });
 </script>
 

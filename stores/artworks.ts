@@ -8,6 +8,11 @@ export const useArtworkStore = defineStore('artworks', {
   state: (): State => ({
     artworks: []
   }),
+  getters: {
+    countByCategory: (state) => {
+      return (categoryId: number) => state.artworks.filter((art: Artwork) => art.categoryId === categoryId).length;
+    },
+  },
   actions: {
     upsertArtwork (artwork: Artwork, categoryId?: number) {
       // If we passed a categoryId, add it to the artwork
@@ -32,6 +37,11 @@ export const useArtworkStore = defineStore('artworks', {
       return this.artworks.find((art: Artwork) => {
         return art.categoryId === categoryId && art.id === id;
       });
+    },
+    findArtworksByCategory (categoryId: number, start: number = 0, end: number = 16) {
+      return this.artworks
+        .filter((art: Artwork) => art.categoryId === categoryId)
+        .slice(start, end);
     }
   }
 });

@@ -1,5 +1,5 @@
 <template>
-  <AtomsNavigation :to="path">
+  <AtomsNavigation :to="to" direction="up">
     <div class="teaser">
       <div v-if="artwork.image" class="teaser-img-wrapper">
         <img class="teaser-img" :src="artwork.image" />
@@ -32,11 +32,11 @@ import { PropType } from "vue";
 const props = defineProps({
   artwork: {
     type: Object as PropType<Artwork>,
-    required: true,
+    required: true
   },
-  path: {
+  to: {
     type: Object,
-    required: true,
+    required: true
   },
 });
 </script>

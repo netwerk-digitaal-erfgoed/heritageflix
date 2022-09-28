@@ -1,5 +1,7 @@
-import { Config } from 'tailwindcss'
-export default <Config>{
+import defaultTheme from 'tailwindcss/defaultTheme'
+
+/** @type {import('tailwindcss').Config} */
+module.exports = {
   content: [],
   theme: {
     colors: {
@@ -10,13 +12,15 @@ export default <Config>{
     },
     fontFamily: {
       poppins: ['Poppins'],
-      roboto: ['Roboto']
     },
     container: {
       center: true,
       padding: '0.75rem',
     },
     extend: {
+      fontFamily: {
+        'sans': ['Poppins', ...defaultTheme.fontFamily.sans],
+      },
       fontSize: {
         'base': ['1rem', '1.43'],
         'xl': ['1.25rem', '1'],
@@ -37,6 +41,6 @@ export default <Config>{
   safelist: [
     {
       pattern: /^grid-cols-/
-    },
+    }
   ]
 }

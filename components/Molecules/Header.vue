@@ -1,45 +1,37 @@
 <template>
-  <div class="grid grid-cols-12 gap-x-2 w-full">
+  <div class="grid grid-cols-12 my-7">
     <MoleculesIconNavigation
       v-if="showHome"
-      class="col-span-1 col-start-1 flex justify-end"
+      class="col-span-1 col-start-1 flex justify-center"
       name="logo"
       :to=homePath
-      :direction="transition"
     />
-    <slot class="col-span-8 col-start-2 flex justify-center" />
+    <div class="col-span-10 col-start-2 flex justify-center">
+      <slot  />
+    </div>
     <MoleculesIconNavigation
       v-if="showCategory"
-      class="col-span-1 col-start-10"
+      class="col-span-1 flex justify-center"
       name="close"
       :to="categoryPath"
-      :direction="transition"
+      direction="down"
     />
   </div>
 </template>
 
 <script setup lang="ts">
-  const activeRoute = useActiveRoute();
+const route = useRoute();
+const props = defineProps({
+  showHome: {
+    type: Boolean,
+    default: true
+  },
+  showCategory: {
+    type: Boolean,
+    default: false
+  }
+});
 
-  const props = defineProps({
-    showHome: {
-      type: Boolean,
-      default: true
-    },
-    showCategory: {
-      type: Boolean,
-      default: false
-    },
-    title: {
-      type: String,
-      default: ''
-    },
-    transition: {
-      type: String,
-      default: ''
-    }
-  });
-
-  const homePath = {name: 'index'};
-  const categoryPath = {name: 'category', params: { category: activeRoute.params.category }};
+const homePath = { name: 'index' };
+const categoryPath = { name: 'category', params: { category: route.params.category } };
 </script>

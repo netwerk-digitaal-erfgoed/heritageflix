@@ -4,7 +4,7 @@ interface State {
   categories: Category[]
 }
 
-export const useCategoriesStore = defineStore('categories', {
+export const useCategoryStore = defineStore('categories', {
   state: (): State => ({
     categories: []
   }),
