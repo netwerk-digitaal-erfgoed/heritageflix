@@ -2,15 +2,19 @@
   "private": true,
   "scripts": {
     "build": "nuxt build",
+    "coverage": "vitest run --coverage",
     "dev": "nuxt dev --port=3051",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
+    "sparql:gui": "http-server yasgui",
     "story:dev": "histoire dev",
     "story:build": "histoire build",
-    "story:preview": "histoire preview"
+    "story:preview": "histoire preview",
+    "test": "vitest"
   },
   "dependencies": {
+    "@comunica/query-sparql": "^2.4.3",
     "@heroicons/vue": "^2.0.10",
     "@nuxtjs/tailwindcss": "^5.3.2",
     "@pinia/nuxt": "^0.4.2",
@@ -20,10 +24,15 @@
     "vue-awesome-paginate": "^1.0.5"
   },
   "devDependencies": {
+    "@esbuild-plugins/node-globals-polyfill": "^0.1.1",
     "@histoire/plugin-nuxt": "^0.10.7",
     "@histoire/plugin-vue": "^0.10.7",
     "@nuxtjs/google-fonts": "^3.0.0-0",
+    "@nuxt/test-utils-edge": "^3.0.0-rc.12-27736489.2e080c2",
     "histoire": "^0.10.7",
-    "vite-svg-loader": "^3.6.0"
+    "http-server": "^14.1.1",
+    "rollup-plugin-node-polyfills": "^0.2.1",
+    "vite-svg-loader": "^3.6.0",
+    "vitest": "^0.23.4"
   }
 }
