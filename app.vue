@@ -8,25 +8,48 @@
 import { useCategoryStore } from "@/stores/categories";
 import { useArtworkStore } from "@/stores/artworks";
 
-const { upsertCategory } = useCategoryStore();
+const { $ndeRepository } = useNuxtApp();
+
+const { upsertCategory, findCategoryBySlug } = useCategoryStore();
 const { upsertArtwork } = useArtworkStore();
 
+const periods = await $ndeRepository.getArtPeriodsWithArt();
+periods.forEach((period: any) => {
+  // Load the artworks for this period
+  $ndeRepository.getArtworksForPeriod(period.artPeriod)
+  .then((artworks: any) => {
+    // Insert artworks into the store
+    artworks.forEach((artwork: any) => {
+      upsertArtwork({
+        id: artwork.heritageObject,
+        categoryId: period.artPeriod,
+        artist: artwork.creatorName,
+        description: artwork?.description,
+        digitalObjectURL: artwork?.URL,
+        image: artwork?.imageContentUrl,
+        museum: artwork?.publisher,
+        museumURL: artwork?.publisher,
+        period: artwork?.dateCreated,
+        slug: useSlugify(artwork?.name),
+        title: artwork?.name
+      });
+    });
+    return {period: period, artworks: artworks}
+  })
+  .then((result: any) => {
+    const { period, artworks } = result;
 
-const { categories } = await fetch(
-  `http://localhost:3051/categories.json`
-).then((r) => r.json());
-categories.forEach((cat: Category) => upsertCategory(cat))
-
-// Load in the art per category
-const loadArt = async (id: number) => {
-  const { artworks } = await fetch(`http://localhost:3051/categories/${id}.json`).then(
-    (r) => r.json()
-  );
-  artworks.forEach((art: Artwork) => upsertArtwork(art, id))
-};
-
-// For test purposes only category 1 is filled
-await loadArt(1);
+    // Create the category
+    upsertCategory({
+      id: period.artPeriod,
+      title: useCapitalize(period.name),
+      slug: useSlugify(period.name),
+      period: usePeriodName(period?.startDate, period?.endDate),
+      numberOfArtworks: parseInt(period.numberOfHeritageObjects, 10),
+      image: artworks[0].imageContentUrl
+    });
+  })
+});
 </script>
 
 <style lang="scss">

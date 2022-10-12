@@ -1,5 +1,5 @@
 declare interface Artwork {
-  id: number,
+  id: string,
   categoryId?: number,
   artist: string,
   description: string,
