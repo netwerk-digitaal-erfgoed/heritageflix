@@ -1,17 +1,4 @@
-import { QueryEngine } from '@comunica/query-sparql'
-import { QuerySourceContext } from '@rdfjs/types/query/queryable'
-import { Bindings } from '@comunica/types';
-
 export type idType = `<${string}>`;
-export async function getQueryResults (query: string, context: QuerySourceContext<string>): Promise<Array<Bindings>> {
-  const engine = new QueryEngine()
-  const bindingsStream = await engine.queryBindings(query, context)
-  bindingsStream.on('error', (error) => {
-    console.error(error);
-  });
-
-  return await bindingsStream.toArray()
-}
 
 const fetchQuery = async (query: string): Promise<Array<Object>> => {
   return $fetch('https://api.data.netwerkdigitaalerfgoed.nl/datasets/heritageflix/v1/services/v1/sparql', {
