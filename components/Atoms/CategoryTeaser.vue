@@ -31,7 +31,7 @@ const props = defineProps({
 const path = {
   name: "category",
   params: {
-    category: props.category.slug,
+    category: props.category.id,
   },
 };
 </script>

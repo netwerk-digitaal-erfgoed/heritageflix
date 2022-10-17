@@ -35,8 +35,8 @@ export class NdeRepository {
     return fetchQuery(query);
   }
 
-  async getArtworksForPeriod (periodId: string, limit: Number = 16, offset: Number = 0) {
-    console.log(periodId, limit, offset)
+  async getArtworksForPeriod (periodId: string, limit: number = 16, page: number = 0) {
+    const offset = page * limit;
     const query = `
       PREFIX schema: <https://schema.org/>
 

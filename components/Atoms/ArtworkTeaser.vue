@@ -1,5 +1,7 @@
 <template>
-  <AtomsNavigation :to="to" direction="up">
+  <!-- Temporary disabled navigating up -->
+  <!-- <AtomsNavigation :to="to" direction="up"> -->
+  <AtomsNavigation :to="to">
     <div class="teaser">
       <div v-if="artwork.image" class="teaser-img-wrapper">
         <img class="teaser-img" :src="artwork.image" />

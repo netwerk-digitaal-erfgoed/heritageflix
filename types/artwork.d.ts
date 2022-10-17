@@ -1,6 +1,7 @@
 declare interface Artwork {
   id: string,
-  categoryId?: number,
+  originalId: string,
+  categoryId: string,
   artist: string,
   description: string,
   digitalObjectURL: string,
@@ -8,6 +9,5 @@ declare interface Artwork {
   museum: string,
   museumURL: string,
   period: string,
-  slug: string,
   title: string,
 };

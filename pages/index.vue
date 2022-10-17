@@ -15,5 +15,13 @@
 
 <script setup lang="ts">
 import { useCategoryStore } from "@/stores/categories";
-const { categories } = useCategoryStore();
+import { useArtworkStore } from "@/stores/artworks";
+import { storeToRefs } from 'pinia';
+
+const { categories } = storeToRefs(useCategoryStore());
+const { listOrFetchByCategory } = useArtworkStore();
+
+onMounted(() => {
+  categories.value.forEach((category: Category) => listOrFetchByCategory(category.id));
+});
 </script>
