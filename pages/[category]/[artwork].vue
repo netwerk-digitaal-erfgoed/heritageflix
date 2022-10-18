@@ -38,7 +38,7 @@ import { storeToRefs } from 'pinia';
 
 // Transition settings
 definePageMeta({
-  middleware: ['has-artwork'],
+  middleware: ['redirect-without-artwork'],
   pageTransition: {
     name: "slide",
     mode: "in-out",
