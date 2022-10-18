@@ -43,11 +43,10 @@ definePageMeta({
     name: "slide",
     mode: "in-out",
     duration: 1000,
-    // Temporary disable the noScroll transition
-    // onBeforeEnter() { useNoScroll() },
-    // onAfterEnter() { useScroll() },
-    // onLeave() { useNoScroll() },
-    // onAfterLeave() { useScroll() },
+    onBeforeEnter() { useNoScroll() },
+    onAfterEnter() { useScroll() },
+    onBeforeLeave() { useNoScroll() },
+    onAfterLeave() { useScroll() }
   }
 });
 

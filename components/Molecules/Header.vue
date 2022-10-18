@@ -9,19 +9,12 @@
     <div class="col-span-10 col-start-2 flex justify-center">
       <slot  />
     </div>
-    <!-- Temporary disabled navigating down -->
-    <!-- <MoleculesIconNavigation
-      v-if="showCategory"
-      class="col-span-1 flex justify-center"
-      name="close"
-      :to="categoryPath"
-      direction="down"
-    /> -->
     <MoleculesIconNavigation
       v-if="showCategory"
       class="col-span-1 flex justify-center"
       name="close"
       :to="categoryPath"
+      direction="down"
     />
   </div>
 </template>
