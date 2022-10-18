@@ -1,8 +1,8 @@
 declare interface Category {
-  id: number,
-  image: string,
-  numberOfArtworks: number,
+  id: string,
+  originalId: string,
+  image?: string,
+  numberOfArtworks?: number,
   period: string,
-  slug: string,
   title: string
 }

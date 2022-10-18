@@ -3,8 +3,8 @@
     <MoleculesHeader />
     <section class="cover-image" :style="cssVars">
       <div class="flex flex-col justify-center items-center glass">
-        <h1 class="text-white title">{{ category.title }}</h1>
-        <h2 class="text-white title">{{ category.period }}</h2>
+        <h1 class="text-white title">{{ state.category?.title }}</h1>
+        <h2 class="text-white title">{{ state.category?.period }}</h2>
       </div>
     </section>
 
@@ -12,19 +12,19 @@
       <div class="px-3">
         <div class="flex justify-center">
           <div class="w-10/12">
-            <template v-if="totalItems">
+            <template v-if="state.category?.numberOfArtworks">
               <div
                 class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-x-12 gap-y-14"
               >
                 <AtomsArtworkTeaser
-                  v-for="artwork in paginatedArtworks"
-                  :key="artwork.slug"
+                  v-for="artwork in state.artworks"
+                  :key="artwork.id"
                   :artwork="artwork"
                   :to="{
-                    name: 'category-art',
+                    name: 'category-artwork',
                     params: {
                       category: route.params.category,
-                      art: artwork.id,
+                      artwork: artwork.id,
                     },
                   }"
                 />
@@ -32,9 +32,9 @@
 
               <div class="flex justify-center mt-12">
                 <vue-awesome-paginate
-                  :total-items="totalItems"
+                  :total-items="state.category?.numberOfArtworks"
                   :current-page="1"
-                  :items-per-page="artworksPerPage"
+                  :items-per-page="state.pageSize"
                   :max-pages-shown="3"
                   :on-click="goToPage"
                   :hide-prev-next-when-ends="true"
@@ -67,46 +67,8 @@
 import { useCategoryStore } from "@/stores/categories";
 import { useArtworkStore } from "@/stores/artworks";
 
-const { findCategoryBySlug } = useCategoryStore();
-const { upsertArtwork, countByCategory, findArtworksByCategory } = useArtworkStore();
-
-// Load the category
-const route = useRoute();
-const currentCategory = route.params.category as string;
-const category = findCategoryBySlug(currentCategory);
-
-// Load the artworks into the store
-// TODO: Replace with real data
-if (category) {
-  const data = await fetch(
-    `http://localhost:3051/categories/${category.id}.json`
-  ).then((r) => r.json());
-  data?.artworks?.forEach((art: Artwork) => upsertArtwork(art, category.id));
-}
-
-// css vars needed for the header image
-const cssVars = computed(() => {
-  return {
-    backgroundImage: `url(${category.image}})`,
-  };
-});
-
-// Pagination
-let currentPage = ref(1);
-const artworksPerPage = 16;
-
-const paginatedArtworks = computed(() =>
-  findArtworksByCategory(category.id,
-    (currentPage.value - 1) * artworksPerPage,
-    currentPage.value * artworksPerPage
-  )
-);
-
-const goToPage = (page: number) => {
-  currentPage.value = page;
-};
-
-const totalItems = countByCategory(category.id);
+const { findCategoryById } = useCategoryStore();
+const { listOrFetchByCategory } = useArtworkStore();
 
 // Needed for transition to art page
 definePageMeta({
@@ -116,6 +78,37 @@ definePageMeta({
     duration: 1000
   }
 });
+
+// Load the category
+const route = useRoute();
+const category = route.params.category as string;
+// const currentCategory = ;
+const state = reactive({
+  pageSize: 16,
+  page: 0,
+  artworks: [],
+  category: {} as Category
+});
+
+// css vars needed for the header image
+const cssVars = computed(() => {
+  const url = state.category?.image ? `url(${state.category.image})` : '';
+  return {
+    backgroundImage: url,
+  };
+});
+
+const goToPage = async (page: number) => {
+  state.page = (page - 1);
+  state.artworks = await listOrFetchByCategory(category, state.pageSize, state.page);
+};
+
+onMounted(async () => {
+  state.page = 0;
+  state.artworks = await listOrFetchByCategory(category, state.pageSize, state.page);
+  state.category = findCategoryById(category);
+});
+
 </script>
 
 <style scoped lang="scss">

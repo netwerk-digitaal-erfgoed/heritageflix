@@ -1,6 +1,11 @@
 // Default vue-splide theme
 @import '@splidejs/vue-splide/css';
 
+.no-scroll {
+  height: 100vh;
+  overflow:hidden;
+}
+
 .glass {
   width: 100%;
   height: 100%;

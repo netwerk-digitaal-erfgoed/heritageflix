@@ -1,57 +1,99 @@
-import { QueryEngine } from '@comunica/query-sparql'
-import { QuerySourceContext } from '@rdfjs/types/query/queryable'
-
 export type idType = `<${string}>`;
 
-export async function getQueryResults (query: string, context: QuerySourceContext<string>): Promise<Array<Object>> {
-  const engine = new QueryEngine()
-  const bindingsStream = await engine.queryBindings(query, context)
-  return await bindingsStream.toArray()
+const fetchQuery = async (query: string): Promise<Array<Object>> => {
+  return $fetch('https://api.data.netwerkdigitaalerfgoed.nl/datasets/heritageflix/v1/services/v1/sparql', {
+    method: 'POST',
+    body: {
+      query: query
+    }
+  });
 }
 
 export class NdeRepository {
-  private sparqlQueryContext: QuerySourceContext<string> = {
-    sources: ['https://api.data.netwerkdigitaalerfgoed.nl/datasets/Sjors/heritageflix/services/heritageflix/sparql'],
-  }
-
-  async getArtworkList (limit: Number = 10, offset: Number = 0): Promise<Array<Object>> {
+  // Get the periods that have artworks
+  async getArtPeriodsWithArt () {
     const query = `
       PREFIX schema: <https://schema.org/>
-      
-      SELECT *
+
+      SELECT DISTINCT
+        (COUNT(?heritageObject) AS ?numberOfHeritageObjects)
+        ?artPeriod
+        ?name
+        ?startDate
+        ?endDate
       WHERE {
-        ?uri schema:name ?name ;
-          schema:about ?about ;
-          schema:description ?description ;
-          schema:dateCreated ?dateCreated ;
-          schema:creator ?creator ;
-          schema:publisher ?publisher ;
-          schema:image ?image .
-        ?image schema:contentUrl ?imageUrl .
+        ?heritageObject a schema:VisualArtwork ;
+          schema:temporalCoverage ?artPeriod .
+        ?artPeriod a schema:DefinedTerm ;
+          schema:name ?name ;
+          schema:startDate ?startDate .
+        OPTIONAL { ?artPeriod schema:endDate ?endDate }
       }
-      ORDER BY ?dateCreated
-      LIMIT ${limit} OFFSET ${offset}`
-    return getQueryResults(query, this.sparqlQueryContext)
+      ORDER BY ?startDate
+      LIMIT 1000`;
+
+    return fetchQuery(query);
   }
 
-  async getArtworkById (id: idType): Promise<Array<Object>> {
+  async getArtworksForPeriod (periodId: string, limit: number = 16, page: number = 0) {
+    const offset = page * limit;
     const query = `
       PREFIX schema: <https://schema.org/>
-      
+
       SELECT *
       WHERE {
-        ?uri schema:name ?name ;
-          schema:about ?about ;
+        {
+          SELECT *
+          WHERE {
+            ?heritageObject a schema:VisualArtwork ;
+              schema:name ?name ;
+              schema:dateCreated ?dateCreated ;
+              schema:image/schema:contentUrl ?imageContentUrl ;
+              schema:image/schema:encodingFormat ?imageEncodingFormat ;
+              schema:image/schema:license ?imageLicense ;
+              schema:creator/schema:name ?creatorName ;
+              schema:temporalCoverage <${periodId}> .
+          }
+          ORDER BY ?dateCreated
+        }
+      }
+      LIMIT ${limit}
+      OFFSET ${offset}
+    `;
+    return fetchQuery(query);
+  }
+
+  async getArtworkById (id: idType) {
+    const query = `
+      PREFIX schema: <https://schema.org/>
+
+      SELECT *
+      WHERE {
+        BIND(${id} AS ?heritageObject)
+
+        ?heritageObject a schema:VisualArtwork ;
+          schema:name ?name ;
           schema:description ?description ;
           schema:dateCreated ?dateCreated ;
-          schema:creator ?creator ;
-          schema:publisher ?publisher ;
-          schema:image ?image .
-        ?image schema:contentUrl ?imageUrl .
-        FILTER(?uri = ${id})
-      }
-      LIMIT 1`
-    return getQueryResults(query, this.sparqlQueryContext)
+        OPTIONAL { ?heritageObject schema:mainEntityOfPage ?webpage }
+
+        # Art period
+        ?heritageObject schema:temporalCoverage/schema:name ?artPeriodName ;
+          schema:temporalCoverage/schema:startDate ?artPeriodStartDate ;
+          schema:temporalCoverage/schema:endDate ?artPeriodEndDate .
+
+        # Image
+        ?heritageObject schema:image/schema:contentUrl ?imageContentUrl ;
+          schema:image/schema:encodingFormat ?imageEncodingFormat ;
+          schema:image/schema:license ?imageLicense .
+
+        # Creator
+        ?heritageObject schema:creator/schema:name ?creatorName .
+
+        # Publisher
+        ?heritageObject schema:publisher/schema:name ?publisherName .
+        OPTIONAL { ?heritageObject schema:publisher/schema:mainEntityOfPage ?publisherHomepage }
+      }`;
+    return fetchQuery(query);
   }
 }
-

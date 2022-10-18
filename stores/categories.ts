@@ -1,28 +1,41 @@
-import { defineStore } from 'pinia'
+import { defineStore } from 'pinia';
 
-interface State {
-  categories: Category[]
-}
+export const useCategoryStore = defineStore('categories', () => {
+  const categories = ref([]);
 
-export const useCategoryStore = defineStore('categories', {
-  state: (): State => ({
-    categories: []
-  }),
-  actions: {
-    upsertCategory (category: Category) {
-      const idx = this.categories.findIndex((cat: Category) => {
-        return cat.id === category.id;
-      })
-
-      if (idx === -1) {
-        this.categories.push(category);
-      }
-      else {
-        this.categories.splice(idx, 1, category);
-      }
-    },
-    findCategoryBySlug (slug: string) {
-      return this.categories.find((cat: Category) => cat?.slug === slug);
-    }
+  function updateCategory(category: Category): void {
+    const idx = categories.value.findIndex((cat: Category) => cat.id === category.id);
+    categories.value.splice(idx, 1, category);
   }
+
+  function findCategoryById (id: string): Category | undefined {
+    return categories.value.find((cat: Category) => cat.id === id);
+  }
+
+  async function listOrFetchCategories (): Promise<Category[]> {
+    if (!categories.value.length) {
+      await fetchCategories();
+    }
+    return categories.value.slice();
+  }
+
+  /**
+   * Private functions
+   */
+  async function fetchCategories (): Promise<void> {
+    console.warn('Categories.ts#fetchCategories');
+    const { $ndeRepository } = useNuxtApp();
+    const periods = await $ndeRepository.getArtPeriodsWithArt() || [];
+    categories.value = periods.map((period: any) => {
+      return {
+        id: useSlugify(period.name),
+        originalId: period.artPeriod,
+        title: useCapitalize(period.name),
+        period: usePeriodName(period.startDate, period.endDate),
+        numberOfArtworks: parseInt(period.numberOfHeritageObjects, 10)
+      };
+    });
+  }
+
+  return { categories, updateCategory, findCategoryById, listOrFetchCategories };
 });

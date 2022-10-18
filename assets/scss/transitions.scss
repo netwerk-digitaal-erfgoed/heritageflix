@@ -8,10 +8,10 @@
   }
 
   &.slide-enter-from {
-    top: 100%;
+    top: calc(100vh + var(--scroll-offset));
   }
   &.slide-enter-to {
-    top: 0
+    top: var(--scroll-offset);
   }
 }
 

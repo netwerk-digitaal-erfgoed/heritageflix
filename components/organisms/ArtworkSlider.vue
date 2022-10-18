@@ -7,7 +7,7 @@
 
       <AtomsNavigation
         class="text-xl font-medium uppercase"
-        :to="{ name: 'category', params: { category: category.slug } }"
+        :to="{ name: 'category', params: { category: category.id } }"
       >
         Toon alle
       </AtomsNavigation>
@@ -21,8 +21,8 @@
         <AtomsArtworkTeaser
           :artwork="artwork"
           :to="{
-            name: 'category-art',
-            params: { category: category.slug, art: artwork.id },
+            name: 'category-artwork',
+            params: { category: category.id, artwork: artwork.id },
           }"
         />
       </SplideSlide>
@@ -42,8 +42,8 @@ const props = defineProps({
   }
 });
 
-const { findArtworksByCategory } = useArtworkStore();
-const artworks = findArtworksByCategory(props.category.id, 0, 10);
+const { findByCategory } = useArtworkStore();
+const artworks = computed(() => findByCategory(props.category.id, 10, 0));
 const artworksSliderProps = {
   gap: "4.5rem"
 };
