@@ -15,21 +15,21 @@
     "test": "vitest"
   },
   "dependencies": {
-    "@heroicons/vue": "2.0.12",
-    "@nuxtjs/tailwindcss": "5.3.5",
-    "@pinia/nuxt": "0.4.3",
+    "@heroicons/vue": "2.0.13",
+    "@nuxtjs/tailwindcss": "6.1.3",
+    "@pinia/nuxt": "0.4.5",
     "@splidejs/vue-splide": "0.6.12",
-    "sass": "1.55.0",
+    "sass": "1.56.1",
     "vue-awesome-paginate": "1.0.5"
   },
   "devDependencies": {
-    "@histoire/plugin-nuxt": "0.11.5",
-    "@histoire/plugin-vue": "0.11.5",
-    "@nuxt/test-utils-edge": "3.0.0-rc.12-27767306.96a8807",
-    "@nuxtjs/google-fonts": "3.0.0-0",
-    "histoire": "0.11.5",
+    "@histoire/plugin-nuxt": "0.11.7",
+    "@histoire/plugin-vue": "0.11.7",
+    "@nuxt/test-utils-edge": "3.0.1-rc.0-27817270.4f2bfbe",
+    "@nuxtjs/google-fonts": "3.0.0-1",
+    "histoire": "0.11.7",
     "nuxt": "3.0.0-rc.11",
     "vite-svg-loader": "3.6.0",
-    "vitest": "0.24.3"
+    "vitest": "0.25.2"
   }
 }
