@@ -90,6 +90,9 @@ const state = reactive({
   category: {} as Category
 });
 
+state.artworks = await listOrFetchByCategory(category, state.pageSize, state.page);
+state.category = findCategoryById(category);
+
 // css vars needed for the header image
 const cssVars = computed(() => {
   const url = state.category?.image ? `url(${state.category.image})` : '';
@@ -102,13 +105,6 @@ const goToPage = async (page: number) => {
   state.page = (page - 1);
   state.artworks = await listOrFetchByCategory(category, state.pageSize, state.page);
 };
-
-onMounted(async () => {
-  state.page = 0;
-  state.artworks = await listOrFetchByCategory(category, state.pageSize, state.page);
-  state.category = findCategoryById(category);
-});
-
 </script>
 
 <style scoped lang="scss">
