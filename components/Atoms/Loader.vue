@@ -14,17 +14,17 @@
   0%,
   100% {
     transform: scale(0.2);
-    background-color: #30FFB7;
+    background-color: #d2ddde;
   }
 
   40% {
     transform: scale(1);
-    background-color: #07DEFF;
+    background-color: #2E2E2E;
   }
 
   50% {
     transform: scale(1);
-    background-color: #0761FF;
+    background-color: #0D1933;
   }
 }
 
