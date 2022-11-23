@@ -46,7 +46,7 @@
   display: inline-block;
   aspect-ratio: 1/1;
 
-  @for $j from 0 through 5 {
+  @for $j from 0 through 4 {
     &:nth-child(0n + #{$j}) {
       animation-delay: #{ $j * 0.2 }s;
     }

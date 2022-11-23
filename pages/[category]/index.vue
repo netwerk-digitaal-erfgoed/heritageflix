@@ -31,7 +31,7 @@
                 />
               </div>
 
-              <AtomsObserver v-show="hasMore" class="flex justify-center items-center h-10 mt-3" threshold="0.5" @intersect="loadMore">
+              <AtomsObserver v-show="hasMore" class="flex justify-center items-center h-10 mt-3" threshold="0.75" @intersect="loadMore">
                 <AtomsLoader class="w-1/10 h-4" />
               </AtomsObserver>
             </template>
