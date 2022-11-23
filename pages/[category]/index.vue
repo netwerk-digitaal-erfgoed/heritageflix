@@ -12,6 +12,7 @@
       <div class="px-3">
         <div class="flex justify-center">
           <div class="w-10/12">
+
             <template v-if="state.category?.numberOfArtworks">
               <div
                 class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-x-12 gap-y-14"
@@ -30,30 +31,9 @@
                 />
               </div>
 
-              <div class="flex justify-center mt-12">
-                <vue-awesome-paginate
-                  :total-items="state.category?.numberOfArtworks"
-                  :current-page="1"
-                  :items-per-page="state.pageSize"
-                  :max-pages-shown="3"
-                  :on-click="goToPage"
-                  :hide-prev-next-when-ends="true"
-                >
-                  <template #prev-button>
-                    <AtomsIcon
-                      class="h-11 w-11 bg-blue text-black rounded-full"
-                      name="arrowLeft"
-                    />
-                  </template>
-
-                  <template #next-button>
-                    <AtomsIcon
-                      class="h-11 w-11 bg-blue text-black rounded-full"
-                      name="arrowRight"
-                    />
-                  </template>
-                </vue-awesome-paginate>
-              </div>
+              <AtomsObserver v-show="hasMore" class="flex justify-center items-center h-10 mt-3" threshold="0.75" @intersect="loadMore">
+                <AtomsLoader class="w-1/10 h-4" />
+              </AtomsObserver>
             </template>
             <div v-else>No artworks</div>
           </div>
@@ -101,9 +81,13 @@ const cssVars = computed(() => {
   };
 });
 
-const goToPage = async (page: number) => {
-  state.page = (page - 1);
-  state.artworks = await listOrFetchByCategory(category, state.pageSize, state.page);
+const hasMore = computed(() => {
+  return state.category.numberOfArtworks > state.artworks.length;
+});
+
+const loadMore = async () => {
+  state.page += 1;
+  state.artworks.push(...await listOrFetchByCategory(category, state.pageSize, state.page));
 };
 </script>
 
