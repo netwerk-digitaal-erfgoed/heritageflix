@@ -14,7 +14,7 @@ export const useArtworkStore = defineStore('artworks', () => {
   function findPrev (artworkId: string, categoryId: string): Artwork | undefined {
     const idx = findIndex(artworkId, categoryId);
     return artworks.value.find((art: Artwork, index: number) => {
-      return art.categoryId === categoryId && index < idx;
+      return art.categoryId === categoryId && index === (idx - 1);
     });
   }
 
