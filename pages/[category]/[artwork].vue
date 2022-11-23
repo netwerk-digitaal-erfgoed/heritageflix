@@ -1,5 +1,5 @@
 <template>
-  <div class="absolute z-10 bg-white h-screen w-screen overflow-hidden border-blue" :class="transition">
+  <div class="absolute z-10 bg-white h-screen w-screen border-blue" :class="transition">
     <MoleculesHeader :showCategory="true">
       <span class="text-3xl uppercase">{{ currentCategory?.title }} {{ currentCategory?.period }}</span>
     </MoleculesHeader>
@@ -50,6 +50,7 @@ definePageMeta({
   }
 });
 
+const { $navigate } = useNuxtApp()
 const state = reactive({
   next: undefined,
   prev: undefined
@@ -78,6 +79,25 @@ const navPath = (prev: Boolean = false) => {
   const propName = prev ? 'prev' : 'next'
   return { name: route.name, params: { category: category, artwork: state[propName]?.id } };
 };
+
+/**
+ * Based on the direction of the component and the key pressed, trigger navigation
+ */
+const eventHandler = (evt: KeyboardEvent) => {
+  if (['ArrowLeft', 'ArrowRight'].includes(evt.key)) {
+    const path = navPath(evt.key === 'ArrowLeft');
+    const direction = (evt.key === 'ArrowLeft') ? 'right' : 'left';
+    $navigate(path, direction);
+  }
+};
+
+onMounted(() => {
+  document.addEventListener('keyup', eventHandler);
+});
+
+onUnmounted(() => {
+  document.removeEventListener('keyup', eventHandler);
+});
 
 // Check if the total artworks changed to update the next/prev buttons
 watch(totalArtworks, x => {
