@@ -6,10 +6,7 @@
 
 <script setup lang="ts">
 import { useCategoryStore } from "@/stores/categories";
-
-onServerPrefetch(async () => {
-  await useCategoryStore().listOrFetchCategories();
-});
+await useCategoryStore().listOrFetchCategories();
 </script>
 
 <style lang="scss">
