@@ -65,7 +65,7 @@ export const useArtworkStore = defineStore('artworks', () => {
   }
 
   async function fetchByCategory (categoryId: string, limit: number = defaultPageSize, page: number = 0): Promise<void> {
-    console.warn('Artworks.ts#fetchByCategory', categoryId, limit, page);
+    console.warn('Artworks.ts#fetchByCategory');
     const { $ndeRepository } = useNuxtApp();
     const { updateCategory, findCategoryById } = useCategoryStore();
     const category = findCategoryById(categoryId);

@@ -16,9 +16,9 @@
 <script setup lang="ts">
 import { SplideSlide } from "@splidejs/vue-splide";
 
-const props = defineProps({
+const props = defineProps<{
   categories: Array<Category>,
-});
+}>();
 
 const categoriesSliderProps = {
   gap: "1.25rem",
