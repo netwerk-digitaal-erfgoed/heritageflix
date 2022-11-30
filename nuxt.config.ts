@@ -13,7 +13,14 @@ export default defineNuxtConfig({
     '@pinia/nuxt'
   ],
   vite: {
-    plugins: [svgLoader()]
+    plugins: [svgLoader()],
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: '@use "@/assets/scss/variables.scss" as *;'
+        },
+      },
+    },
   },
   googleFonts: {
     families: {

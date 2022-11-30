@@ -40,7 +40,7 @@ const path = {
 .teaser {
   position: relative;
   width: 100%;
-  height: 100vh;
+  height: calc(100vh - ($header-height + 1.5rem ));
   word-wrap: break-word;
   overflow: hidden;
 
