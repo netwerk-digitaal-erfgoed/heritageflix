@@ -6,6 +6,8 @@
 
 <script setup lang="ts">
 import { useCategoryStore } from "@/stores/categories";
+import { useBrandingStore } from "./stores/branding";
+await useBrandingStore().loadBranding();
 await useCategoryStore().listOrFetchCategories();
 </script>
 

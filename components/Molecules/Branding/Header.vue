@@ -1,13 +1,12 @@
 <template>
   <div class="header">
-    <img :src="logoUrl" class="flex"/>
+    <img :src="logo" class="flex"/>
   </div>
 </template>
 
 <script setup lang="ts">
-defineProps<{
-  logoUrl?: string
-}>()
+import { useBrandingStore } from "~~/stores/branding";
+const { logo } = useBrandingStore();
 </script>
 
 <style lang="scss" scoped>

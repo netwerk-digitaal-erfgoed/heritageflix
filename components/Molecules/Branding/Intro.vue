@@ -13,9 +13,8 @@
 </template>
 
 <script setup lang="ts">
-defineProps<{
-  intro: Intro
-}>();
+import { useBrandingStore } from "~~/stores/branding";
+const { intro } = useBrandingStore();
 </script>
 
 <style lang="scss" scoped>
