@@ -4,7 +4,7 @@ import svgLoader from 'vite-svg-loader'
 export default defineNuxtConfig({
   ssr: false,
   css: [
-    '~/assets/scss/main.scss',
+    '@/assets/scss/main.scss',
     '@/assets/scss/transitions.scss'
   ],
   modules: [
