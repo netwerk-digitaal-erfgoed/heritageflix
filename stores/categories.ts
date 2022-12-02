@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia';
+import { useQueriesStore } from '@/stores/queries';
 
 export const useCategoryStore = defineStore('categories', () => {
   const categories = ref([]);
@@ -24,8 +25,8 @@ export const useCategoryStore = defineStore('categories', () => {
    */
   async function fetchCategories (): Promise<void> {
     console.warn('Categories.ts#fetchCategories');
-    const { $ndeRepository } = useNuxtApp();
-    const periods = await $ndeRepository.getArtPeriodsWithArt() || [];
+    const { getCategoryQuery } = useQueriesStore();
+    const periods = await getCategoryQuery() || [];
     categories.value = periods.map((period: any) => {
       return {
         id: useSlugify(period.name),
