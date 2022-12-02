@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia';
 
 export const useBrandingStore = defineStore('branding', () => {
+  const name = ref();
   const intro = ref();
   const logo = ref();
 
@@ -9,9 +10,12 @@ export const useBrandingStore = defineStore('branding', () => {
     const devPrefix = process.dev ? '/assets' : '';
     const jsonLocation = `${devPrefix}/config/branding.json`;
     const branding:Branding = await $fetch(jsonLocation);
+    name.value = branding.name;
     intro.value = branding.intro;
-    logo.value = `${devPrefix}${branding.logo}`;
+    if (branding.logo) {
+      logo.value = `${devPrefix}${branding.logo}`;
+    }
   }
 
-  return { intro, logo, loadBranding };
+  return { intro, logo, name, loadBranding };
 });

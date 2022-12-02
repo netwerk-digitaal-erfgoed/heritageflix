@@ -1,12 +1,13 @@
 <template>
   <div class="header">
-    <img :src="logo" class="flex"/>
+    <img v-if="logo" :src="logo" class="flex"/>
+    <span v-else class="text-6xl text-white uppercase">{{ name }}</span>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useBrandingStore } from "~~/stores/branding";
-const { logo } = useBrandingStore();
+const { logo, name } = useBrandingStore();
 </script>
 
 <style lang="scss" scoped>
