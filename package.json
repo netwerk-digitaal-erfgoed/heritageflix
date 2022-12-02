@@ -5,6 +5,7 @@
     "build": "nuxt build",
     "coverage": "vitest run --coverage",
     "dev": "nuxt dev --port=3051",
+    "start": "export PORT=3051 && nuxt start",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",

@@ -1,12 +1,12 @@
 <template>
-  <div v-if="intro" class="bg-black text-white grid grid-cols-12 gap-x-6 grid-rows-3 gap-y-6 justify-items-center items-center py-8">
-    <span class="title row-start-1 col-span-8 col-start-3">
+  <div v-if="intro" class="bg-black text-white grid grid-cols-12 gap-x-6 gap-y-6 justify-items-center items-center py-8">
+    <span class="title row-start-1 col-span-8 col-start-3" v-if="intro.title">
       {{ intro.title }}
     </span>
-    <span class="description row-start-2 col-span-8 col-start-3">
-      {{ intro.description }}
+    <span class="description row-start-2 col-span-8 col-start-3 break-all" v-if="intro.description">
+      {{ description }}
     </span>
-    <span class="outro row-start-3 col-span-8 col-start-3">
+    <span class="outro row-start-3 col-span-8 col-start-3" v-if="intro.footer">
       {{ intro.footer }}
     </span>
   </div>
@@ -15,6 +15,7 @@
 <script setup lang="ts">
 import { useBrandingStore } from "~~/stores/branding";
 const { intro } = useBrandingStore();
+const description = computed(() => intro.description.substring(0, 300));
 </script>
 
 <style lang="scss" scoped>
