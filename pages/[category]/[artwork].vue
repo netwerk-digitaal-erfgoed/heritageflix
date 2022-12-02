@@ -5,7 +5,7 @@
     </MoleculesHeader>
     <div class="grid grid-cols-12">
       <div class="col-span-1 flex justify-center items-center">
-        <MoleculesIconNavigation name="arrowLeft" :to="navPath(true)" direction="right" v-if="state.prev"/>
+        <MoleculesIconNavigation name="arrowLeft" :to="navPath(true)" v-if="state.prev"/>
       </div>
       <div class="col-span-10 flex flex-col justify-center items-center">
         <div class="placeholder w-full bg-blue flex justify-center items-center">
@@ -24,7 +24,7 @@
         </div>
       </div>
       <div class="col-span-1 flex justify-center items-center">
-        <MoleculesIconNavigation name="arrowRight" :to="navPath()" direction="left" v-if="state.next" />
+        <MoleculesIconNavigation name="arrowRight" :to="navPath()"  v-if="state.next" />
       </div>
     </div>
   </div>
@@ -87,7 +87,7 @@ const eventHandler = (evt: KeyboardEvent) => {
   if (['ArrowLeft', 'ArrowRight'].includes(evt.key)) {
     const path = navPath(evt.key === 'ArrowLeft');
     const direction = (evt.key === 'ArrowLeft') ? 'right' : 'left';
-    $navigate(path, direction);
+    $navigate(path);
   }
 };
 
