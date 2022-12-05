@@ -19,14 +19,9 @@
 </template>
 
 <script setup lang="ts">
-import { PropType } from "vue";
-
-const props = defineProps({
-  category: {
-    type: Object as PropType<Category>,
-    required: true
-  },
-});
+const props = defineProps<{
+  category: Category
+}>();
 
 const path = {
   name: "category",
@@ -40,7 +35,7 @@ const path = {
 .teaser {
   position: relative;
   width: 100%;
-  height: 100vh;
+  height: calc(100vh - ($header-height + 1.5rem ));
   word-wrap: break-word;
   overflow: hidden;
 

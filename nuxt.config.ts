@@ -4,7 +4,7 @@ import svgLoader from 'vite-svg-loader'
 export default defineNuxtConfig({
   ssr: false,
   css: [
-    '~/assets/scss/main.scss',
+    '@/assets/scss/main.scss',
     '@/assets/scss/transitions.scss'
   ],
   modules: [
@@ -13,7 +13,14 @@ export default defineNuxtConfig({
     '@pinia/nuxt'
   ],
   vite: {
-    plugins: [svgLoader()]
+    plugins: [svgLoader()],
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: '@use "@/assets/scss/variables.scss" as *;'
+        },
+      },
+    },
   },
   googleFonts: {
     families: {

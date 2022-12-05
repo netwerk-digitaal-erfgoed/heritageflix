@@ -1,0 +1,5 @@
+{
+  "baseUrl": "https://api.data.netwerkdigitaalerfgoed.nl/datasets/heritageflix/v1/services/v1/sparql",
+  "categoryQuery": "PREFIX schema: <https://schema.org/> SELECT DISTINCT (COUNT(?heritageObject) AS ?numberOfHeritageObjects) ?artPeriod ?name ?startDate ?endDate WHERE { ?heritageObject a schema:VisualArtwork ; schema:temporalCoverage ?artPeriod . ?artPeriod a schema:DefinedTerm ; schema:name ?name ; schema:startDate ?startDate . OPTIONAL { ?artPeriod schema:endDate ?endDate } } ORDER BY ?startDate LIMIT _LIMIT_",
+  "itemsQuery": "PREFIX schema: <https://schema.org/> SELECT * WHERE { { SELECT * WHERE { ?heritageObject a schema:VisualArtwork ; schema:name ?name ; schema:dateCreated ?dateCreated ; schema:image/schema:contentUrl ?imageContentUrl ; schema:image/schema:encodingFormat ?imageEncodingFormat ; schema:image/schema:license ?imageLicense ; schema:creator/schema:name ?creatorName ; schema:temporalCoverage <_PERIODID_> . } ORDER BY ?dateCreated } } LIMIT _LIMIT_ OFFSET _OFFSET_"
+}

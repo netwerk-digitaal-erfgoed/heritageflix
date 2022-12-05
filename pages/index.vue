@@ -1,8 +1,10 @@
 <template>
   <div>
+    <MoleculesBrandingHeader />
     <section>
       <OrganismsCategorySlider :categories="categories" />
     </section>
+    <MoleculesBrandingIntro />
     <section class="py-8">
       <div class="overflow-hidden px-3">
         <div v-for="category in categories" :key="category.id" class="flex justify-center mt-16">
@@ -21,7 +23,7 @@ import { storeToRefs } from 'pinia';
 const { categories } = storeToRefs(useCategoryStore());
 const { listOrFetchByCategory } = useArtworkStore();
 
-onMounted(() => {
+onMounted(async () => {
   categories.value.forEach((category: Category) => listOrFetchByCategory(category.id));
 });
 </script>

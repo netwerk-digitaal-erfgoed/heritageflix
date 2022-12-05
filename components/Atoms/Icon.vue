@@ -5,9 +5,9 @@
 </template>
 
 <script setup lang="ts">
-  const props = defineProps({
-    name: String
-  });
+  const props = defineProps<{
+    name: string
+  }>();
 
   const icon = computed(() => defineAsyncComponent(() => import(`../../assets/icons/${props.name}.svg?component`))).value
 </script>

@@ -31,16 +31,12 @@
 </template>
 
 <script setup lang="ts">
-import { PropType } from "vue";
 import { SplideSlide } from "@splidejs/vue-splide";
 import { useArtworkStore } from "@/stores/artworks";
 
-const props = defineProps({
-  category: {
-    type: Object as PropType<Category>,
-    required: true
-  }
-});
+const props = defineProps<{
+  category: Category
+}>();
 
 const { findByCategory } = useArtworkStore();
 const artworks = computed(() => findByCategory(props.category.id, 10, 0));

@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import { useCategoryStore } from "@/stores/categories";
+import { useQueriesStore } from '@/stores/queries';
 
 const defaultPageSize = 16;
 
@@ -65,14 +66,14 @@ export const useArtworkStore = defineStore('artworks', () => {
   }
 
   async function fetchByCategory (categoryId: string, limit: number = defaultPageSize, page: number = 0): Promise<void> {
-    console.warn('Artworks.ts#fetchByCategory', categoryId, limit, page);
-    const { $ndeRepository } = useNuxtApp();
+    console.warn('Artworks.ts#fetchByCategory');
     const { updateCategory, findCategoryById } = useCategoryStore();
     const category = findCategoryById(categoryId);
 
     // Only fetch if we have the category
     if (category) {
-      const artworksForPeriod:any = await $ndeRepository.getArtworksForPeriod(category.originalId, limit, page) || [];
+      const { getItemsQuery } = useQueriesStore();
+      const artworksForPeriod:any = await getItemsQuery(limit, page, category.originalId) || [];
       artworks.value.push(...artworksForPeriod.map((artwork: any) => {
         const slug = useSlugify(artwork?.name) + "-" + artwork.heritageObject.slice(-4);
         return {

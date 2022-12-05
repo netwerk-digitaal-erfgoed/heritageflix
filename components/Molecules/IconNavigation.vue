@@ -5,12 +5,11 @@
 </template>
 
 <script setup lang="ts">
-  const props = defineProps({
-    name: String,
-    direction: {
-      type: String,
-      default: ''
-    },
-    to: Object
-  });
+withDefaults(defineProps<{
+  name: string,
+  direction?: string,
+  to: Object
+}>(), {
+  direction: ''
+});
 </script>

@@ -19,9 +19,9 @@
 <script setup lang="ts">
 import { Splide, SplideTrack } from "@splidejs/vue-splide";
 
-const props = defineProps({
+const props = defineProps<{
   sliderProps: Object,
-});
+}>();
 
 const splideProps = Object.assign(
   {

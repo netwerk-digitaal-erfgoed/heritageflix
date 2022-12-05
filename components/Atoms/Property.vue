@@ -7,14 +7,14 @@
 </template>
 
 <script setup lang="ts">
-  const props = defineProps({
-    label: String,
-    value: String,
-    href: {
-      type: String,
-      default: ''
-    }
-  });
+withDefaults(defineProps<{
+  label: string,
+  value?: string,
+  href?: string
+}>(), {
+  href: '',
+  value: ''
+});
 </script>
 
 <style scoped lang="scss">
