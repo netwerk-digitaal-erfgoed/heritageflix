@@ -65,6 +65,10 @@ There are some limitations.
 - Logo has a height restriction of 60px;
 - Intro - title, description or footer are all optional
 - Intro - all values are plain text
+- Intro - title is always 1 line and cuts off after certain point, some safe sizes are:
+  - width 1024px - 30 characters
+  - width 1280px - 36 characters
+  - width 1600px - 45 characters
 - Intro - max length of description is 300
 
 ## Queries.json
