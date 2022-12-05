@@ -27,18 +27,10 @@
 </template>
 
 <script setup lang="ts">
-import { PropType } from "vue";
-
-const props = defineProps({
-  artwork: {
-    type: Object as PropType<Artwork>,
-    required: true
-  },
-  to: {
-    type: Object,
-    required: true
-  },
-});
+defineProps<{
+  artwork: Artwork,
+  to: Object
+}>();
 </script>
 
 <style lang="scss" scoped>

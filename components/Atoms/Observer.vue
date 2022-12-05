@@ -8,17 +8,12 @@
 const root = ref();
 const observer = ref();
 const emit = defineEmits(['intersect']);
-const props = defineProps({
-  threshold: {
-    type: String,
-    required: false,
-    default: '1.0'
-  },
-  marginRoot: {
-    type: String,
-    required: false,
-    default: '0px'
-  }
+const props = withDefaults(defineProps<{
+  threshold?: string,
+  marginRoot?: string
+}>(), {
+  threshold: '1.0',
+  marginRoot: '0px'
 });
 
 onMounted(() => {

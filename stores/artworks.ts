@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { useCategoryStore } from "@/stores/categories";
-import { useQueriesStore } from './queries';
+import { useQueriesStore } from '@/stores/queries';
 
 const defaultPageSize = 16;
 

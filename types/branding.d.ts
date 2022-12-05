@@ -1,11 +1,12 @@
 declare interface Intro {
-  title: String,
-  description: String,
-  footer: String
+  title: string,
+  description: string,
+  footer: string
 };
 
 declare interface Branding {
   name: string,
   logo: string,
+  banner: string,
   intro: Intro
 };

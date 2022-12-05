@@ -33,7 +33,7 @@ export const useQueriesStore = defineStore('queries', () => {
     return $fetch(apiUrl, {
       method: 'POST',
       body: {
-        query: query
+        query
       }
     });
   }

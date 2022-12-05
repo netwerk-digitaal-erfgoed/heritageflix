@@ -21,15 +21,12 @@
 
 <script setup lang="ts">
 const route = useRoute();
-const props = defineProps({
-  showHome: {
-    type: Boolean,
-    default: true
-  },
-  showCategory: {
-    type: Boolean,
-    default: false
-  }
+withDefaults(defineProps<{
+  showHome?: boolean,
+  showCategory?: boolean
+}>(), {
+  showHome: true,
+  showCategory: false
 });
 
 const homePath = { name: 'index' };

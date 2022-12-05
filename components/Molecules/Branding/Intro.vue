@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-import { useBrandingStore } from "~~/stores/branding";
+import { useBrandingStore } from "@/stores/branding";
 const { intro } = useBrandingStore();
 const description = computed(() => intro.description.substring(0, 300));
 </script>

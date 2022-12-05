@@ -19,14 +19,9 @@
 </template>
 
 <script setup lang="ts">
-import { PropType } from "vue";
-
-const props = defineProps({
-  category: {
-    type: Object as PropType<Category>,
-    required: true
-  },
-});
+const props = defineProps<{
+  category: Category
+}>();
 
 const path = {
   name: "category",
