@@ -5,15 +5,15 @@ WORKDIR /usr/src/app
 
 COPY . /usr/src/app
 RUN npm ci
-RUN npm run build
+RUN npm run generate
 
-FROM node:14
+FROM nginx:alpine
 
 RUN mkdir -p /app
 WORKDIR /app
 
-COPY --from=build /usr/src/app/.output /app
+COPY --from=build /usr/src/app/.output/public /app
+COPY ./assets/config /app/config
+COPY ./nginx.conf /etc/nginx/nginx.conf
 
 EXPOSE 3000
-
-CMD [ "node", "server/index.mjs" ]
