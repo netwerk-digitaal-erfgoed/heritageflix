@@ -29,6 +29,7 @@ const description = computed(() => intro.description.substring(0, 300));
 }
 
 .banner {
+  width: 100%;
   position: absolute;
   filter: grayscale(100%);
 }
