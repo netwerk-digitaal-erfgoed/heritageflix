@@ -27,7 +27,7 @@
               </div>
 
               <AtomsObserver v-show="hasMore" class="flex justify-center items-center h-10 mt-3" threshold="0.75" @intersect="loadMore">
-                <AtomsLoader class="w-1/10 h-4" />
+                <AtomsLoader class="w-1/10 h-3" />
               </AtomsObserver>
             </template>
             <div v-else>No artworks</div>
@@ -35,6 +35,7 @@
         </div>
       </div>
     </section>
+    <MoleculesBrandingFooter />
   </div>
 </template>
 

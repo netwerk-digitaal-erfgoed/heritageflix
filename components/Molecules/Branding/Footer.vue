@@ -1,5 +1,5 @@
 <template>
-  <div v-if="intro" class="bg-black text-white grid grid-cols-12 gap-x-6 gap-y-6 justify-items-center items-center py-4">
+  <div v-if="intro" class="bg-black text-white grid grid-cols-12 gap-x-6 gap-y-6 justify-items-center items-center w-full">
     <div class="col-start-0 col-span-2">
       <AtomsIcon name="ndeLogo" />
     </div>

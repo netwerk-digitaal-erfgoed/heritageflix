@@ -1,6 +1,6 @@
 <template>
   <AtomsNavigation
-    class="col-span-1 col-start-1 flex justify-center items-center"
+    class="col-span-1 col-start-1 flex justify-center items-center uppercase"
     :to="homePath"
   >
     <AtomsIcon name="home" class="h-5 w-5 mr-2" />
