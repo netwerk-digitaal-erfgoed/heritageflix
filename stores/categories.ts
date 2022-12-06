@@ -32,6 +32,7 @@ export const useCategoryStore = defineStore('categories', () => {
         id: useSlugify(period.name),
         originalId: period.artPeriod,
         title: useCapitalize(period.name),
+        description: period.description,
         period: usePeriodName(period.startDate, period.endDate),
         numberOfArtworks: parseInt(period.numberOfHeritageObjects, 10)
       };
