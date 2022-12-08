@@ -12,18 +12,12 @@ export const useBrandingStore = defineStore('branding', () => {
     const jsonLocation = `${devPrefix}/config/branding.json`;
     const branding:Branding = await $fetch(jsonLocation);
 
-    // Add the name
+    // Set refs
     name.value = branding.name || '';
-
-    // Add the intro
     intro.value = branding.intro || '';
-
-    // Check if there is a banner
     if (branding.banner) {
       banner.value = `${devPrefix}${branding.banner}`;
     }
-
-    // Check if there is a logo
     if (branding.logo) {
       logo.value = `${devPrefix}${branding.logo}`;
     }

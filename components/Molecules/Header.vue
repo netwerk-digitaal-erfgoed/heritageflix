@@ -1,5 +1,5 @@
 <template>
-  <div :class="{'base': true, 'dark-mode': darkMode}">
+  <div :class="{ 'base': true, 'dark-mode': darkMode }">
     <MoleculesButtonsHome />
     <span v-if="title" class="title">
       {{ title }}

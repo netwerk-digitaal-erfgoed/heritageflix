@@ -11,30 +11,4 @@
 <script setup lang="ts">
 import { useBrandingStore } from "@/stores/branding";
 const { intro } = useBrandingStore();
-const description = computed(() => intro.description.substring(0, 300));
 </script>
-
-<style lang="scss" scoped>
-// Typography
-.title {
-  font-weight: 600;
-  font-size: 2.75rem;
-  line-height: 125%;
-  text-transform: uppercase;
-}
-
-.description {
-  font-weight: 400;
-  font-size: 1.5rem;
-  line-height: 125%;
-  text-transform: uppercase;
-}
-
-.outro {
-  font-weight: 700;
-  font-size: 1.25rem;
-  line-height: 125%;
-  text-transform: uppercase;
-}
-
-</style>
