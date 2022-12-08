@@ -8,9 +8,7 @@
         </div>
       <div class="col-start-2 col-span-6 row-start-9 row-span-4 flex flex-col m-4 mr-0" ref="descriptionContainer">
         <h2 class="text-2xl" ref="titleElement">{{ currentArtwork?.title }}</h2>
-        <div :class="visualizeDescription">{{ currentArtwork?.description }}
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-        </div>
+        <div :class="visualizeDescription">{{ currentArtwork?.description }}</div>
       </div>
       <div class="col-start-8 col-span-4 row-start-9 row-span-4 p-20 grid grid-cols-2 h-min gap-y-4">
         <!-- TODO: Make this dynamic -->
