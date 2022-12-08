@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <div class="flex flex-col min-h-screen">
     <MoleculesHeader :title="title" dark-mode class="fixed top-0" />
     <img v-if="categoryImage" :src="categoryImage" class="cover-image" />
 
-    <section class="py-24">
+    <section class="py-24 flex-auto">
       <div class="px-3">
         <div class="flex justify-center">
           <div class="w-10/12">
@@ -91,25 +91,5 @@ const loadMore = async () => {
 .cover-image {
   @apply w-full object-cover;
   height: 16rem;
-}
-
-// @TODO: Move typography to a generic setup
-.title {
-  font-size: 4.375rem;
-}
-
-.pagination-container {
-  display: flex;
-  column-gap: 2.75rem;
-}
-
-:deep(.paginate-buttons) {
-  height: 2.75rem;
-  width: 2.75rem;
-  cursor: pointer;
-
-  &.active-page {
-    background-color: #f2f5ff;
-  }
 }
 </style>

@@ -6,11 +6,11 @@
       </div>
 
       <div class="teaser-body">
-        <div v-if="artwork.title" class="teaser-title">
+        <div v-if="artwork.title" class="text-base font-semibold">
           {{ artwork.title }}
         </div>
 
-        <div v-if="artwork.artist || artwork.period" class="teaser-subtitle">
+        <div v-if="artwork.artist || artwork.period" class="text-sm font-light">
           <template v-if="artwork.artist">
             {{ artwork.artist }}
           </template>
@@ -78,17 +78,5 @@ defineProps<{
   background-color: rgba(0, 0, 0, 0.3);
   color: #ffffff;
   backdrop-filter: blur(0.25rem);
-}
-
-.teaser-title {
-  font-size: 1.5rem;
-  line-height: 1.25;
-  font-weight: 600;
-}
-
-.teaser-subtitle {
-  font-size: 1rem;
-  line-height: 1.43;
-  font-weight: 300;
 }
 </style>

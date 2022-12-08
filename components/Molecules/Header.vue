@@ -1,7 +1,7 @@
 <template>
   <div :class="{ 'base': true, 'dark-mode': darkMode }">
     <MoleculesButtonsHome />
-    <span v-if="title" class="title">
+    <span v-if="title" class="text-xl font-semibold uppercase col-span-10 col-start-2 flex justify-center">
       {{ title }}
     </span>
     <MoleculesButtonsCategory v-if="showCategory" />
@@ -27,13 +27,5 @@ withDefaults(defineProps<{
   &.dark-mode {
     @apply bg-black text-white;
   }
-}
-
-.title {
-  @apply col-span-10 col-start-2 flex justify-center;
-  font-weight: 600;
-  font-size: 2rem;
-  line-height: 125%;
-  text-transform: uppercase;
 }
 </style>

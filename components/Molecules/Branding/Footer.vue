@@ -3,7 +3,7 @@
     <div class="col-start-0 col-span-2">
       <AtomsIcon name="ndeLogo" />
     </div>
-    <span class="col-start-6 col-span-2">HeritageFlix</span>
+    <span class="col-start-6 col-span-2 text-base font-light">HeritageFlix</span>
     <span class="col-start-11 col-span-2">[SOCIALIZE ICONS]</span>
   </div>
 </template>
