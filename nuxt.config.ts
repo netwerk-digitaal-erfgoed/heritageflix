@@ -24,8 +24,7 @@ export default defineNuxtConfig({
   },
   googleFonts: {
     families: {
-      Roboto: true,
-      Poppins: true
+      Poppins: [300, 400, 600, 700]
     }
   }
 });

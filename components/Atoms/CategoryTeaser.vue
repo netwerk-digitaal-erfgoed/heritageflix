@@ -85,6 +85,7 @@ const path = {
 }
 
 .teaser-title {
+  font-weight: 600;
   font-size: 2.5rem;
   line-height: 1.5;
   margin-bottom: 1.25rem;

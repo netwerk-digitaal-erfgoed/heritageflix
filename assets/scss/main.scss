@@ -18,3 +18,19 @@
   @extend .glass;
   backdrop-filter: blur(0);
 }
+
+// Support multiple truncate lengths
+@for $j from 1 through 10 {
+  .truncate-lines-#{$j} {
+    display: -webkit-box;
+    -webkit-line-clamp: #{$j};
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: normal;
+  }
+}
+
+.hide-element {
+  display: none;
+}
