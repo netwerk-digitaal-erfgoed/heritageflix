@@ -4,5 +4,6 @@ declare interface Category {
   image?: string,
   numberOfArtworks?: number,
   period: string,
-  title: string
+  title: string,
+  description?: string
 }

@@ -10,7 +10,7 @@ export const useQueriesStore = defineStore('queries', () => {
   let categoryQuery: string;
   let itemsQuery: string;
 
-  async function getCategoryQuery (limit: number = 1000) {
+  async function getCategoryQuery (limit: number = 1000): Promise<Category[]> {
     const query = createQuery(categoryQuery, {
       "_LIMIT_": limit.toString()
     });
@@ -22,7 +22,7 @@ export const useQueriesStore = defineStore('queries', () => {
     });
   }
 
-  async function getItemsQuery (limit: number, page: number, periodId: string = null, locationId: string = null) {
+  async function getItemsQuery (limit: number, page: number, periodId: string = null, locationId: string = null): Promise<Artwork[]> {
     const query = createQuery(itemsQuery, {
       "_LIMIT_": limit.toString(),
       "_OFFSET_": (page * limit).toString(),

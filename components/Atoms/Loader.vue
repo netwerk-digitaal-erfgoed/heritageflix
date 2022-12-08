@@ -39,14 +39,14 @@
 }
 
 .dot {
-  height: 100%;
+  height: inherit;
   border-radius: 50%;
   transform: scale(0);
   animation: scaling 2.5s ease-in-out infinite;
   display: inline-block;
   aspect-ratio: 1/1;
 
-  @for $j from 0 through 4 {
+  @for $j from 0 through 5 {
     &:nth-child(0n + #{$j}) {
       animation-delay: #{ $j * 0.2 }s;
     }

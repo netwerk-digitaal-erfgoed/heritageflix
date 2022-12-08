@@ -1,12 +1,7 @@
 <template>
   <div>
-    <MoleculesHeader />
-    <section class="cover-image" :style="cssVars">
-      <div class="flex flex-col justify-center items-center glass">
-        <h1 class="text-white title">{{ state.category?.title }}</h1>
-        <h2 class="text-white title">{{ state.category?.period }}</h2>
-      </div>
-    </section>
+    <MoleculesHeader :title="title" dark-mode class="fixed top-0" />
+    <img v-if="categoryImage" :src="categoryImage" class="cover-image" />
 
     <section class="py-24">
       <div class="px-3">
@@ -32,7 +27,7 @@
               </div>
 
               <AtomsObserver v-show="hasMore" class="flex justify-center items-center h-10 mt-3" threshold="0.75" @intersect="loadMore">
-                <AtomsLoader class="w-1/10 h-4" />
+                <AtomsLoader class="w-1/10 h-3" />
               </AtomsObserver>
             </template>
             <div v-else>No artworks</div>
@@ -40,6 +35,7 @@
         </div>
       </div>
     </section>
+    <MoleculesBrandingFooter />
   </div>
 </template>
 
@@ -73,12 +69,12 @@ const state = reactive({
 state.artworks = await listOrFetchByCategory(category, state.pageSize, state.page);
 state.category = findCategoryById(category);
 
-// css vars needed for the header image
-const cssVars = computed(() => {
-  const url = state.category?.image ? `url(${state.category.image})` : '';
-  return {
-    backgroundImage: url,
-  };
+const title = computed(() => {
+  return `${state.category?.title} ${state.category?.period}`;
+});
+
+const categoryImage = computed(() => {
+  return state.category?.image;
 });
 
 const hasMore = computed(() => {
@@ -93,11 +89,8 @@ const loadMore = async () => {
 
 <style scoped lang="scss">
 .cover-image {
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: 595px;
-  width: 100%;
-  position: relative;
+  @apply w-full object-cover;
+  height: 16rem;
 }
 
 // @TODO: Move typography to a generic setup

@@ -1,34 +1,39 @@
 <template>
-  <div class="grid grid-cols-12 my-7">
-    <MoleculesIconNavigation
-      v-if="showHome"
-      class="col-span-1 col-start-1 flex justify-center"
-      name="logo"
-      :to=homePath
-    />
-    <div class="col-span-10 col-start-2 flex justify-center">
-      <slot  />
-    </div>
-    <MoleculesIconNavigation
-      v-if="showCategory"
-      class="col-span-1 flex justify-center"
-      name="close"
-      :to="categoryPath"
-      direction="down"
-    />
+  <div :class="{ 'base': true, 'dark-mode': darkMode }">
+    <MoleculesButtonsHome />
+    <span v-if="title" class="title">
+      {{ title }}
+    </span>
+    <MoleculesButtonsCategory v-if="showCategory" />
   </div>
 </template>
 
 <script setup lang="ts">
-const route = useRoute();
 withDefaults(defineProps<{
-  showHome?: boolean,
+  darkMode?: boolean,
+  title?: string,
   showCategory?: boolean
 }>(), {
-  showHome: true,
+  darkMode: false,
+  title: '',
   showCategory: false
 });
-
-const homePath = { name: 'index' };
-const categoryPath = { name: 'category', params: { category: route.params.category } };
 </script>
+
+<style scoped lang="scss">
+.base {
+  @apply grid grid-cols-12 py-7 items-center bg-white text-black w-full z-10;
+
+  &.dark-mode {
+    @apply bg-black text-white;
+  }
+}
+
+.title {
+  @apply col-span-10 col-start-2 flex justify-center;
+  font-weight: 600;
+  font-size: 2rem;
+  line-height: 125%;
+  text-transform: uppercase;
+}
+</style>

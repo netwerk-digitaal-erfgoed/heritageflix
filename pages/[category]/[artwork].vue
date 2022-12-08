@@ -1,8 +1,6 @@
 <template>
   <div class="absolute z-10 bg-white h-screen w-screen border-blue" :class="transition">
-    <MoleculesHeader :showCategory="true">
-      <span class="text-3xl uppercase">{{ currentCategory?.title }} {{ currentCategory?.period }}</span>
-    </MoleculesHeader>
+    <MoleculesHeader :title="title" :showCategory="true" />
     <div class="grid grid-cols-12">
       <div class="col-span-1 flex justify-center items-center">
         <MoleculesIconNavigation name="arrowLeft" :to="navPath(true)" v-if="state.prev"/>
@@ -70,6 +68,10 @@ const { totalArtworks } = storeToRefs(artworkStore);
 const route = useRoute();
 const { category, artwork } = route.params as unknown as Params
 const currentCategory = findCategoryById(category);
+
+const title = computed(() => {
+  return `${currentCategory?.title} ${currentCategory?.period}`;
+});
 
 // Find the current artwork
 const currentArtwork = findById(artwork, category);
