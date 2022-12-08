@@ -92,24 +92,4 @@ const loadMore = async () => {
   @apply w-full object-cover;
   height: 16rem;
 }
-
-// @TODO: Move typography to a generic setup
-.title {
-  font-size: 4.375rem;
-}
-
-.pagination-container {
-  display: flex;
-  column-gap: 2.75rem;
-}
-
-:deep(.paginate-buttons) {
-  height: 2.75rem;
-  width: 2.75rem;
-  cursor: pointer;
-
-  &.active-page {
-    background-color: #f2f5ff;
-  }
-}
 </style>

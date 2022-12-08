@@ -6,11 +6,11 @@
       </div>
 
       <div class="teaser-body">
-        <div v-if="category.title" class="teaser-title">
+        <div v-if="category.title" class="text-2xl font-semibold uppercase">
           {{ category.title }}
         </div>
 
-        <div v-if="category.period" class="teaser-subtitle">
+        <div v-if="category.period" class="text-xl">
           {{ category.period }}
         </div>
       </div>
@@ -82,17 +82,5 @@ const path = {
   background-color: rgba(0, 0, 0, 0.3);
   color: #ffffff;
   text-align: center;
-}
-
-.teaser-title {
-  font-weight: 600;
-  font-size: 2.5rem;
-  line-height: 1.5;
-  margin-bottom: 1.25rem;
-}
-
-.teaser-subtitle {
-  font-size: 2.5rem;
-  line-height: 1.5;
 }
 </style>

@@ -1,17 +1,17 @@
 <template>
   <div class="artwork-slider" v-if="artworks.length">
-    <div class="flex justify-between items-center mb-7">
-      <div class="text-5xl uppercase">
+    <div class="flex justify-between items-center mb-2">
+      <div class="text-3xl uppercase">
         {{ category.title }} {{ category.period }}
       </div>
       <AtomsNavigation
-        class="text-xl font-medium uppercase"
+        class="text-base font-medium uppercase"
         :to="{ name: 'category', params: { category: category.id } }"
       >
         Toon alles
       </AtomsNavigation>
     </div>
-    <div v-if="category.description" class="text-xl uppercase mb-7">
+    <div v-if="category.description" class="text-base tracking-wide uppercase font-light mb-7">
       {{ category.description }}
     </div>
     <MoleculesSlider
