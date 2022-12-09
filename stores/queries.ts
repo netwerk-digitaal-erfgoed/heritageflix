@@ -40,7 +40,7 @@ export const useQueriesStore = defineStore('queries', () => {
 
   async function loadQueries (): Promise<void> {
     console.warn('Queries.ts#load');
-    const devPrefix = process.dev ? '/assets' : '';
+    const devPrefix = process.dev ? '/_nuxt/assets' : '';
     const jsonLocation = `${devPrefix}/config/queries.json`;
     const data:QueryData = await $fetch(jsonLocation);
     apiUrl = data.baseUrl;

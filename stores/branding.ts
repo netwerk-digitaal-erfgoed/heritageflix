@@ -8,7 +8,7 @@ export const useBrandingStore = defineStore('branding', () => {
 
   async function loadBranding (): Promise<void> {
     console.warn('Branding.ts#load');
-    const devPrefix = process.dev ? '/assets' : '';
+    const devPrefix = process.dev ? '/_nuxt/assets' : '';
     const jsonLocation = `${devPrefix}/config/branding.json`;
     const branding:Branding = await $fetch(jsonLocation);
 

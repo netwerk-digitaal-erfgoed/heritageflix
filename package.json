@@ -17,18 +17,18 @@
   "dependencies": {
     "@heroicons/vue": "2.0.13",
     "@nuxtjs/tailwindcss": "6.1.3",
-    "@pinia/nuxt": "0.4.5",
+    "@pinia/nuxt": "0.4.6",
     "@splidejs/vue-splide": "0.6.12",
-    "sass": "1.56.1"
+    "sass": "1.56.2"
   },
   "devDependencies": {
-    "@histoire/plugin-nuxt": "0.11.7",
-    "@histoire/plugin-vue": "0.11.7",
-    "@nuxt/test-utils-edge": "3.0.1-rc.0-27817270.4f2bfbe",
+    "@histoire/plugin-nuxt": "0.11.9",
+    "@histoire/plugin-vue": "0.11.9",
+    "@nuxt/test-utils-edge": "3.0.1-rc.0-27841867.1202b1a",
     "@nuxtjs/google-fonts": "3.0.0-1",
-    "histoire": "0.11.7",
-    "nuxt": "3.0.0-rc.11",
+    "histoire": "0.11.9",
+    "nuxt": "3.0.0",
     "vite-svg-loader": "3.6.0",
-    "vitest": "0.25.2"
+    "vitest": "0.25.6"
   }
 }
