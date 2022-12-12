@@ -54,11 +54,17 @@ definePageMeta({
   }
 });
 
+interface State {
+  pageSize: number,
+  page: number,
+  artworks: Artwork[],
+  category?: Category
+}
+
 // Load the category
 const route = useRoute();
 const category = route.params.category as string;
-// const currentCategory = ;
-const state = reactive({
+const state = reactive<State>({
   pageSize: 16,
   page: 0,
   artworks: [],
@@ -77,7 +83,7 @@ const categoryImage = computed(() => {
 });
 
 const hasMore = computed(() => {
-  return state.category.numberOfArtworks > state.artworks.length;
+  return(state.category?.numberOfArtworks || 0) > state.artworks.length;
 });
 
 const loadMore = async () => {
