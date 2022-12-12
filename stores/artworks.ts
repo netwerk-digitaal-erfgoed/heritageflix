@@ -5,7 +5,7 @@ import { useQueriesStore } from '@/stores/queries';
 const defaultPageSize = 16;
 
 export const useArtworkStore = defineStore('artworks', () => {
-  const artworks = ref([]);
+  const artworks = ref<Artwork[]>([]);
   const totalArtworks = computed(() => artworks.value.length);
 
   function findById (id: string, categoryId: string): Artwork | undefined {
@@ -65,6 +65,18 @@ export const useArtworkStore = defineStore('artworks', () => {
     return artworks.value.filter((art: Artwork) => art.categoryId === categoryId).length;
   }
 
+  function generateProperties (input: ArtworkResponse): ArtProperty[] {
+    const nameSpaces = ['creator', 'image', 'contentLocation', 'province', 'temporalCoverage'];
+    const topLevelProps = ['heritageObject', 'name', 'identifier', 'description', 'imageContentUrl'];
+    const keys = Object.keys(input).filter((keyName: string) => !nameSpaces.includes(keyName) && !topLevelProps.includes(keyName));
+    return keys.map((keyName: string) => {
+      return {
+        name: keyName,
+        value: input[keyName as keyof ArtworkResponse]
+      }
+    });
+  }
+
   async function fetchByCategory (categoryId: string, limit: number = defaultPageSize, page: number = 0): Promise<void> {
     console.warn('Artworks.ts#fetchByCategory');
     const { updateCategory, findCategoryById } = useCategoryStore();
@@ -73,27 +85,22 @@ export const useArtworkStore = defineStore('artworks', () => {
     // Only fetch if we have the category
     if (category) {
       const { getItemsQuery } = useQueriesStore();
-      const artworksForPeriod:any = await getItemsQuery(limit, page, category.originalId) || [];
-      artworks.value.push(...artworksForPeriod.map((artwork: any) => {
-        const slug = useSlugify(artwork?.name) + "-" + artwork.heritageObject.slice(-4);
+      const response = await getItemsQuery(limit, page, category.originalId) || [];
+      artworks.value.push(...response.map((input: ArtworkResponse): Artwork => {
         return {
-          id: slug,
-          originalId: artwork.heritageObject,
-          artist: artwork.creatorName,
-          categoryId: categoryId,
-          description: artwork?.description,
-          digitalObjectURL: artwork?.URL,
-          image: artwork?.imageContentUrl,
-          museum: artwork?.publisher,
-          museumURL: artwork?.publisher,
-          period: artwork?.dateCreated,
-          title: artwork?.name
+          id: input.identifier || `${useSlugify(input.name || '')} - ${input.heritageObject.slice(-4)}`,
+          title: input.name || `${input.locationName}, ${input.provinceName}`,
+          description: input.description,
+          originalId: input.heritageObject,
+          image: input.imageContentUrl,
+          categoryId,
+          properties: generateProperties(input)
         };
       }));
 
       // Update the category if needed
-      if (artworksForPeriod.length && !category.image) {
-        updateCategory({...category, image: artworksForPeriod[0].imageContentUrl});
+      if (response.length && !category.image) {
+        updateCategory({...category, image: response[0].imageContentUrl});
       }
     }
   }

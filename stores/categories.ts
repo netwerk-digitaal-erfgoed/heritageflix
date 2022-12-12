@@ -2,7 +2,7 @@ import { defineStore } from 'pinia';
 import { useQueriesStore } from '@/stores/queries';
 
 export const useCategoryStore = defineStore('categories', () => {
-  const categories = ref([]);
+  const categories = ref<Category[]>([]);
 
   function updateCategory(category: Category): void {
     const idx = categories.value.findIndex((cat: Category) => cat.id === category.id);
@@ -26,15 +26,14 @@ export const useCategoryStore = defineStore('categories', () => {
   async function fetchCategories (): Promise<void> {
     console.warn('Categories.ts#fetchCategories');
     const { getCategoryQuery } = useQueriesStore();
-    const periods = await getCategoryQuery() || [];
-    categories.value = periods.map((period: any) => {
+    categories.value = (await getCategoryQuery() || []).map((category: CategoryResponse) => {
       return {
-        id: useSlugify(period.name),
-        originalId: period.artPeriod,
-        title: useCapitalize(period.name),
-        description: period.description,
-        period: usePeriodName(period.startDate, period.endDate),
-        numberOfArtworks: parseInt(period.numberOfHeritageObjects, 10)
+        id: useSlugify(category.name),
+        originalId: category.id,
+        title: useCapitalize(category.name),
+        description: category.description,
+        period: usePeriodName(category?.startDate, category?.endDate),
+        numberOfArtworks: parseInt(category.numberOfHeritageObjects, 10)
       };
     });
   }
