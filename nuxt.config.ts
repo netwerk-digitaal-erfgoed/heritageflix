@@ -14,6 +14,7 @@ export default defineNuxtConfig({
   modules: [
     '@nuxtjs/google-fonts',
     '@nuxtjs/tailwindcss',
+    '@nuxtjs/i18n',
     '@pinia/nuxt'
   ],
   vite: {
@@ -30,5 +31,17 @@ export default defineNuxtConfig({
     families: {
       Poppins: [300, 400, 600, 700]
     }
-  }
+  },
+  i18n: {
+    langDir: 'locales',
+    locales: [
+      {
+        code: 'nl',
+        file: 'nl.json',
+        name: 'Nederlands'
+      },
+    ],
+    defaultLocale: 'nl',
+    strategy: 'no_prefix'
+  },
 });

@@ -26,6 +26,7 @@
     "@histoire/plugin-vue": "0.11.9",
     "@nuxt/test-utils-edge": "3.0.1-rc.0-27841867.1202b1a",
     "@nuxtjs/google-fonts": "3.0.0-1",
+    "@nuxtjs/i18n": "^8.0.0-beta.7",
     "histoire": "0.11.9",
     "nuxt": "3.0.0",
     "vite-svg-loader": "3.6.0",
