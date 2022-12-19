@@ -12,10 +12,3 @@ await useBrandingStore().loadBranding();
 await useQueriesStore().loadQueries();
 await useCategoryStore().listOrFetchCategories();
 </script>
-
-<style lang="scss">
-body {
-  background-image: url("~/assets/images/index-bg.png");
-  background-size: cover;
-}
-</style>
