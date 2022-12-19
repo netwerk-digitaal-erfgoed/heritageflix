@@ -1,8 +1,8 @@
 <template>
-  <div class="sidenote bg-black text-white flex justify-center items-center fixed left-0 bottom-20 rounded-b-3xl origin-top-left h-8 w-40 cursor-pointer select-none z-10" @click="openAbout">
+  <div class="bg-black text-white flex justify-center items-center fixed left-0 bottom-20 rounded-b-3xl origin-top-left h-8 w-40 cursor-pointer select-none z-10 rotate-270" @click="openAbout">
     HeritageFlix
   </div>
-  <div class="backdrop absolute inset-0 w-full h-full overflow-hidden flex items-center justify-center z-10" v-if="isOpen" @click.self="closeAbout" :style="backdropStyles">
+  <div v-if="isOpen" class="backdrop absolute inset-0 w-full h-full overflow-hidden flex items-center justify-center z-10 bg-black/40" @click.self="closeAbout" :style="backdropStyles">
     <div class="bg-black text-white p-8 max-w-md">
       <div class="header flex justify-center relative items-center mb-5">
         <span class="text-2xl text-white ">HeritageFlix</span>
@@ -11,9 +11,9 @@
         </button>
       </div>
       <div class="content flex flex-col justify-center mb-5">
-        <span class="font-semibold mb-5">Nog nooit heb je zoveel schilderijen van Johannes Vermeer bij elkaar kunnen zien.</span>
+        <span class="font-semibold mb-5">[Nog nooit heb je zoveel schilderijen van Johannes Vermeer bij elkaar kunnen zien.]</span>
         <span class="font-light">
-          We brengen de meeste van Vermeers schilderijen van over de hele wereld voor jou samen. Grijp je kans om de schilder goed te leren kennen en dichterbij Vermeer te komen.Grijp je kans om de schilder goed te leren kennen en dichterbij Vermeer te komen.
+          [We brengen de meeste van Vermeers schilderijen van over de hele wereld voor jou samen. Grijp je kans om de schilder goed te leren kennen en dichterbij Vermeer te komen.Grijp je kans om de schilder goed te leren kennen en dichterbij Vermeer te komen].
         </span>
       </div>
       <div class="footer flex flex-nowrap justify-between">
@@ -43,17 +43,7 @@ const closeAbout = () => {
 
 const backdropStyles = computed(() => {
   return {
-    '--scrollTop': `${scrollTop.value}px`
+    'top': `${scrollTop.value}px`
   };
 });
 </script>
-
-<style scoped lang="scss">
-.sidenote {
-  transform: rotate(270deg);
-}
-.backdrop {
-  background-color: rgba(0, 0, 0, 0.4);
-  top: var(--scrollTop);
-}
-</style>

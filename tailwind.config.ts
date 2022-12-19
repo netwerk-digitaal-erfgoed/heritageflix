@@ -58,6 +58,9 @@ module.exports = {
       fontFamily: {
         'sans': ['Poppins', ...defaultTheme.fontFamily.sans],
       },
+      rotate: {
+        '270': '270deg',
+      },
       screens: {
         'sm': '576px',
         'lg': '992px',
