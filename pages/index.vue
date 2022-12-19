@@ -2,9 +2,9 @@
   <div>
     <MoleculesBrandingHeader />
     <section>
-      <OrganismsCategorySlider :categories="categories" />
+      <OrganismsCategorySlider :categories="categories" class="z-20" />
     </section>
-    <MoleculesBrandingIntro />
+    <MoleculesBrandingIntro class="z-20" />
     <section class="py-8">
       <div class="overflow-hidden px-3">
         <div v-for="category in categories" :key="category.id" class="flex justify-center mt-16">
@@ -12,7 +12,6 @@
         </div>
       </div>
     </section>
-    <MoleculesBrandingFooter />
   </div>
 </template>
 

@@ -1,6 +1,7 @@
 <template>
   <div class="min-h-screen">
     <NuxtPage />
+    <MoleculesSidenote />
   </div>
 </template>
 

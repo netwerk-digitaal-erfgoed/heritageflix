@@ -35,7 +35,6 @@
         </div>
       </div>
     </section>
-    <MoleculesBrandingFooter />
   </div>
 </template>
 
