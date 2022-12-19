@@ -12,9 +12,10 @@ export default defineNuxtConfig({
     '@/assets/scss/transitions.scss'
   ],
   modules: [
+    '@nuxt/content',
     '@nuxtjs/google-fonts',
-    '@nuxtjs/tailwindcss',
     '@nuxtjs/i18n',
+    '@nuxtjs/tailwindcss',
     '@pinia/nuxt'
   ],
   vite: {
