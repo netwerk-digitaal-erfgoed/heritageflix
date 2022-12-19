@@ -13,7 +13,7 @@
       <div class="content flex flex-col justify-center mb-5">
         <span class="font-semibold mb-5">[Nog nooit heb je zoveel schilderijen van Johannes Vermeer bij elkaar kunnen zien.]</span>
         <span class="font-light">
-          [We brengen de meeste van Vermeers schilderijen van over de hele wereld voor jou samen. Grijp je kans om de schilder goed te leren kennen en dichterbij Vermeer te komen.Grijp je kans om de schilder goed te leren kennen en dichterbij Vermeer te komen].
+          [We brengen de meeste van Vermeers schilderijen van over de hele wereld voor jou samen. Grijp je kans om de schilder goed te leren kennen en dichterbij Vermeer te komen.].
         </span>
       </div>
       <div class="footer flex flex-nowrap justify-between">
