@@ -76,6 +76,14 @@ export const useArtworkStore = defineStore('artworks', () => {
     }, {});
   }
 
+  function countById (): Record<string, number> {
+    return artworks.value.reduce((collection: Record<string, number>, currentValue: Artwork) => {
+      const id = currentValue.id.replace(/(.*)-\d*/i, "$1");
+      collection[id] = (id in collection) ? collection[id] + 1 : 1;
+      return collection;
+    }, {});
+  }
+
   async function fetchByCategory (categoryId: string, limit: number = defaultPageSize, page: number = 0): Promise<void> {
     console.warn('Artworks.ts#fetchByCategory');
     const { updateCategory, findCategoryById } = useCategoryStore();
@@ -85,9 +93,13 @@ export const useArtworkStore = defineStore('artworks', () => {
     if (category) {
       const { getItemsQuery } = useQueriesStore();
       const response = await getItemsQuery(limit, page, category.originalId) || [];
+      const counts = countById();
       artworks.value.push(...response.map((input: ArtworkResponse): Artwork => {
+        const id = input.identifier || useSlugify(input.name || '');
+        const suffix = counts[id] ? `-${counts[id]}` : '';
+        counts[id] = (id in counts) ? counts[id] + 1 : 1;
         return {
-          id: input.identifier || `${useSlugify(input.name || '')} - ${input.heritageObject.slice(-4)}`,
+          id: `${id}${suffix}`,
           title: input.name || `${input.locationName}, ${input.provinceName}`,
           description: input.description,
           originalId: input.heritageObject,
