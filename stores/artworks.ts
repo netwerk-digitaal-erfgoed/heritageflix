@@ -65,16 +65,15 @@ export const useArtworkStore = defineStore('artworks', () => {
     return artworks.value.filter((art: Artwork) => art.categoryId === categoryId).length;
   }
 
-  function generateProperties (input: ArtworkResponse): ArtProperty[] {
+  function generateProperties (input: ArtworkResponse): ArtProperties {
     const nameSpaces = ['creator', 'image', 'contentLocation', 'province', 'temporalCoverage'];
     const topLevelProps = ['heritageObject', 'name', 'identifier', 'description', 'imageContentUrl'];
-    const keys = Object.keys(input).filter((keyName: string) => !nameSpaces.includes(keyName) && !topLevelProps.includes(keyName));
-    return keys.map((keyName: string) => {
-      return {
-        name: keyName,
-        value: input[keyName as keyof ArtworkResponse]
+    return Object.keys(input).reduce((collection: ArtProperties, currentValue: string) => {
+      if (!nameSpaces.includes(currentValue) && !topLevelProps.includes(currentValue)) {
+        collection[currentValue] = input[currentValue as keyof ArtworkResponse];
       }
-    });
+      return collection;
+    }, {});
   }
 
   async function fetchByCategory (categoryId: string, limit: number = defaultPageSize, page: number = 0): Promise<void> {

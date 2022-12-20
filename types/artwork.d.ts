@@ -26,10 +26,7 @@ declare interface ArtworkResponse extends Painting, Church {
   imageEncodingFormat?: string,
 };
 
-declare interface ArtProperty {
-  name: string,
-  value?: string
-}
+declare interface ArtProperties extends Record<string, any> {};
 
 declare interface Artwork {
   id: string,
@@ -37,6 +34,6 @@ declare interface Artwork {
   categoryId: string,
   title?: string,
   description?: string,
-  image?: string
-  properties: ArtProperty[]
+  image?: string,
+  properties: ArtProperties
 }
