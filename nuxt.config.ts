@@ -12,7 +12,9 @@ export default defineNuxtConfig({
     '@/assets/scss/transitions.scss'
   ],
   modules: [
+    '@nuxt/content',
     '@nuxtjs/google-fonts',
+    '@nuxtjs/i18n',
     '@nuxtjs/tailwindcss',
     '@pinia/nuxt'
   ],
@@ -30,5 +32,17 @@ export default defineNuxtConfig({
     families: {
       Poppins: [300, 400, 600, 700]
     }
-  }
+  },
+  i18n: {
+    langDir: 'locales',
+    locales: [
+      {
+        code: 'nl',
+        file: 'nl.json',
+        name: 'Nederlands'
+      },
+    ],
+    defaultLocale: 'nl',
+    strategy: 'no_prefix'
+  },
 });

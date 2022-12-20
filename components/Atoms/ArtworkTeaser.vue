@@ -10,16 +10,8 @@
           {{ artwork.title }}
         </div>
 
-        <div v-if="artwork.artist || artwork.period" class="text-sm font-light">
-          <template v-if="artwork.artist">
-            {{ artwork.artist }}
-          </template>
-
-          <template v-if="artwork.artist && artwork.period">,</template>
-
-          <template v-if="artwork.period">
-            {{ artwork.period }}
-          </template>
+        <div v-if="subtitle" class="text-sm font-light">
+          {{ subtitle }}
         </div>
       </div>
     </div>
@@ -27,10 +19,16 @@
 </template>
 
 <script setup lang="ts">
-defineProps<{
+const props = defineProps<{
   artwork: Artwork,
   to: Object
 }>();
+
+const subtitle = computed(() => {
+  return [props.artwork.properties.creatorName, props.artwork.properties.dateCreated]
+    .filter(value => value)
+    .join(', ');
+});
 </script>
 
 <style lang="scss" scoped>

@@ -11,11 +11,7 @@
         <div :class="visualizeDescription">{{ currentArtwork?.description }}</div>
       </div>
       <div class="col-start-8 col-span-4 row-start-9 row-span-4 p-20 grid grid-cols-2 h-min gap-y-4">
-        <!-- TODO: Make this dynamic -->
-        <AtomsProperty label="Maker" :value="currentArtwork?.artist" />
-        <AtomsProperty label="Jaar" :value="currentArtwork?.period" />
-        <AtomsProperty label="Museum" :value="currentArtwork?.museum" :href="currentArtwork?.museumURL" />
-        <AtomsProperty label="Digital Object" value="Bekijk hier" :href="currentArtwork?.digitalObjectURL" />
+        <AtomsProperty v-for="(value, name) in currentArtwork?.properties" :key="name" :label="name.toString()" :value="value" />
       </div>
       <MoleculesIconNavigation name="arrowRight" :to="navPath()" v-if="state.next" class="col-span-1 flex justify-center items-center row-start-1 row-span-8 col-start-12" />
     </div>
@@ -43,7 +39,7 @@ definePageMeta({
 });
 
 const { $navigate } = useNuxtApp();
-const state = reactive({
+const state = reactive<{next?: Artwork, prev?:Artwork}>({
   next: undefined,
   prev: undefined
 })
