@@ -14,6 +14,7 @@ WORKDIR /app
 
 COPY --from=build /usr/src/app/.output/public /app
 COPY ./assets/config /app/config
+COPY ./content /app/content
 COPY ./nginx.conf /etc/nginx/nginx.conf
 
 EXPOSE 3000
