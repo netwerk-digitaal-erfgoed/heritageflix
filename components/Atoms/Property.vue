@@ -1,7 +1,7 @@
 <template>
   <div class="property">
     <label class="font-bold text-sm">{{ $t(label) }}</label>
-    <span v-if="isLink" class="text-sm text-underline"><NuxtLink :to="value">{{ linkValue }}</NuxtLink></span>
+    <span v-if="isLink" class="text-sm hover:underline"><NuxtLink :to="value">{{ linkValue }}</NuxtLink></span>
     <span v-else class="text-sm">{{ value }}</span>
   </div>
 </template>
