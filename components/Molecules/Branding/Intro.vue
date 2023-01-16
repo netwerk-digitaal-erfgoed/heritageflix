@@ -1,6 +1,5 @@
 <template>
-  <div v-if="intro" class="intro bg-black text-white">
-    <img v-if="banner" :src="banner" class="banner" />
+  <div v-if="intro" :class="introClass" :style="introStyle">
     <div class="grid grid-cols-12 gap-x-6 gap-y-6 justify-items-center items-center py-20 glass-noblur">
       <span v-if="intro.title" class="text-3xl font-semibold uppercase row-start-1 col-span-8 col-start-3 overflow-hidden whitespace-nowrap max-w-full">
         {{ intro.title }}
@@ -19,6 +18,19 @@
 import { useBrandingStore } from "@/stores/branding";
 const { intro, banner } = useBrandingStore();
 const description = computed(() => intro.description?.substring(0, 300));
+const introStyle = computed(() => {
+  return {
+    '--url': `url(${banner})`
+  }
+});
+const introClass = computed(() => {
+  return {
+    'intro': true,
+    'bg-black': true,
+    'text-white': true,
+    'intro-bg': !!banner
+  };
+})
 </script>
 
 <style lang="scss" scoped>
@@ -28,9 +40,11 @@ const description = computed(() => intro.description?.substring(0, 300));
   overflow: hidden;
 }
 
-.banner {
-  width: 100%;
-  position: absolute;
+.intro-bg {
+  background-image: var(--url);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
   filter: grayscale(100%);
 }
 </style>
