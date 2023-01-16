@@ -45,4 +45,9 @@ export default defineNuxtConfig({
     defaultLocale: 'nl',
     strategy: 'no_prefix'
   },
+  content: {
+    experimental: {
+       clientDB: true
+    }
+  }
 });
