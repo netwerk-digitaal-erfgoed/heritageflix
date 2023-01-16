@@ -1,6 +1,6 @@
 <template>
   <div class="header">
-    <img v-if="logo" :src="logo" class="flex"/>
+    <img v-if="logo" :src="logo" class="header-image flex"/>
     <span v-else class="text-6xl text-white uppercase">{{ name }}</span>
   </div>
 </template>
@@ -18,5 +18,8 @@ const { logo, name } = useBrandingStore();
     justify-content: center;
     align-items: center;
     height: $header-height;
+  }
+  .header-image {
+    max-height: 3.75rem;
   }
 </style>

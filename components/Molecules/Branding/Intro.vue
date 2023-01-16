@@ -40,16 +40,11 @@ const introClass = computed(() => {
   overflow: hidden;
 }
 
-.banner {
-  width: 100%;
-  position: absolute;
-  filter: grayscale(100%);
-}
-
 .intro-bg {
   background-image: var(--url);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+  filter: grayscale(100%);
 }
 </style>
