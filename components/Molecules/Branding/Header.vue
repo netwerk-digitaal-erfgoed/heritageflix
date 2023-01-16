@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <img v-if="logo" :src="logo" class="header-image flex"/>
-    <span v-else class="text-6xl text-white uppercase">{{ name }}</span>
+    <span v-else-if="name" class="text-3xl text-white uppercase">{{ name }}</span>
   </div>
 </template>
 
