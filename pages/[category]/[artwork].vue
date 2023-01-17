@@ -11,7 +11,7 @@
         <div :class="visualizeDescription">{{ currentArtwork?.description }}</div>
       </div>
       <div class="col-start-8 col-span-4 row-start-9 row-span-4 p-20 grid grid-cols-2 h-min gap-y-4">
-        <AtomsProperty v-for="(value, name) in currentArtwork?.properties" :key="name" :label="name.toString()" :value="value" />
+        <AtomsPropertyGroup v-for="(prop, name) in currentArtwork?.properties" :key="name" :label="name.toString()" :prop="prop" />
       </div>
       <MoleculesIconNavigation name="arrowRight" :to="navPath()" v-if="state.next" class="col-span-1 flex justify-center items-center row-start-1 row-span-8 col-start-12" />
     </div>
@@ -99,7 +99,9 @@ const eventHandler = (evt: KeyboardEvent) => {
   if (['ArrowLeft', 'ArrowRight'].includes(evt.key)) {
     const path = navPath(evt.key === 'ArrowLeft');
     const direction = (evt.key === 'ArrowLeft') ? 'right' : 'left';
-    $navigate(path);
+    if (path.params.artwork) {
+      $navigate(path);
+    }
   }
 };
 

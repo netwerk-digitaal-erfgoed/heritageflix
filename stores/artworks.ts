@@ -65,14 +65,60 @@ export const useArtworkStore = defineStore('artworks', () => {
     return artworks.value.filter((art: Artwork) => art.categoryId === categoryId).length;
   }
 
-  function generateProperties (input: ArtworkResponse): ArtProperties {
-    const nameSpaces = ['creator', 'image', 'contentLocation', 'province', 'temporalCoverage'];
-    const topLevelProps = ['heritageObject', 'name', 'identifier', 'description', 'imageContentUrl'];
-    return Object.keys(input).reduce((collection: ArtProperties, currentValue: string) => {
-      if (!nameSpaces.includes(currentValue) && !topLevelProps.includes(currentValue)) {
-        collection[currentValue] = input[currentValue as keyof ArtworkResponse];
+  function generateTitle ({name, provinceName, contentLocationNames}: ArtworkResponse): string {
+    if (name) {
+      return name;
+    }
+    const locationName = contentLocationNames?.split('; ').pop();
+    return `${locationName}, ${provinceName}`
+  }
+
+  function generateSubtitle ({dateCreated, creatorNames}: ArtworkResponse): string {
+    const creatorName = creatorNames?.split('; ').pop();
+    return [creatorName, dateCreated]
+      .filter(value => value)
+      .join(', ');
+  }
+
+  function generateName (input: string): string {
+    if (input.includes('URI')) {
+      return input.replace(/URI/, 'Name');
+    } else {
+      const hasPluralName = input.slice(-1) === 's';
+      const prepend = hasPluralName ? input.slice(0, -1) : input;
+      const append = `Name${hasPluralName ? 's' : ''}`;
+      return `${prepend}${append}`;
+    }
+  }
+
+  function generateProperties ({ heritageObject, name, identifier, description, imageURI, publisherHomepage, ...metadata  }: ArtworkResponse): ArtProperties {
+    const linkableProps = ['imageLicenseURI', 'provinceURI', 'publisherURI', 'creators', 'contentLocationURIs'];
+    return Object.keys(metadata).reduce((collection: ArtProperties, currentValue: string) => {
+      // @ts-ignore
+      const values = (metadata[currentValue] || '').split('; ');
+      const isPublisherURI = currentValue === 'publisherURI';
+
+      // Check if the property is linkable
+      if (linkableProps.includes(currentValue)) {
+        const name = generateName(currentValue);
+        // @ts-ignore
+        const names = metadata[name].split('; ');
+
+        const result = values.map((value: any, index: number) => {
+          return {
+            label: names[index],
+            value: (isPublisherURI && !value) ? publisherHomepage : value
+          }
+        });
+        collection[currentValue] = result.length > 1 ? result : result[0];
+      } else {
+        if (!currentValue.includes('Name')) {
+          collection[currentValue] = {
+            value: values[0]
+          }
+        }
       }
-      return collection;
+      return collection
     }, {});
   }
 
@@ -92,26 +138,28 @@ export const useArtworkStore = defineStore('artworks', () => {
     // Only fetch if we have the category
     if (category) {
       const { getItemsQuery } = useQueriesStore();
-      const response = await getItemsQuery(limit, page, category.originalId) || [];
+      const response = await getItemsQuery(limit, page, category.originalId).catch(error => console.error(error)) || [];
       const counts = countById();
       artworks.value.push(...response.map((input: ArtworkResponse): Artwork => {
         const id = input.identifier || useSlugify(input.name || '');
         const suffix = counts[id] ? `-${counts[id]}` : '';
         counts[id] = (id in counts) ? counts[id] + 1 : 1;
+        const properties = generateProperties(input);
         return {
           id: `${id}${suffix}`,
-          title: input.name || `${input.locationName}, ${input.provinceName}`,
+          title: generateTitle(input),
+          subTitle: generateSubtitle(input),
           description: input.description,
           originalId: input.heritageObject,
-          image: input.imageContentUrl,
+          image: input.imageURI,
           categoryId,
-          properties: generateProperties(input)
+          properties
         };
       }));
 
       // Update the category if needed
       if (response.length && !category.image) {
-        updateCategory({...category, image: response[0].imageContentUrl});
+        updateCategory({...category, image: response[0].imageURI});
       }
     }
   }

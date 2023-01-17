@@ -1,8 +1,8 @@
 {
   "dateCreated": "Jaar",
-  "imageLicense": "Licentie",
-  "imageEncodingFormat": "Formaat",
-  "creatorName": "Maker",
-  "locationName": "Plek",
-  "provinceName": "Provincie"
+  "imageLicenseURI": "Licentie",
+  "creators": "Makers",
+  "contentLocationURIs": "Plek",
+  "provinceURI": "Provincie",
+  "publisherURI": "Publisher"
 }
