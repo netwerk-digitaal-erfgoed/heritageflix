@@ -10,8 +10,8 @@
           {{ artwork.title }}
         </div>
 
-        <div v-if="subtitle" class="text-sm font-light">
-          {{ subtitle }}
+        <div v-if="artwork.subTitle" class="text-sm font-light">
+          {{ artwork.subTitle }}
         </div>
       </div>
     </div>
@@ -19,16 +19,10 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps<{
+defineProps<{
   artwork: Artwork,
   to: Object
 }>();
-
-const subtitle = computed(() => {
-  return [props.artwork.properties.creatorName, props.artwork.properties.dateCreated]
-    .filter(value => value)
-    .join(', ');
-});
 </script>
 
 <style lang="scss" scoped>

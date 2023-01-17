@@ -1,29 +1,27 @@
-interface Namespaces {
-  creator?: string,
-  image?: string,
-  province?: string,
-  contentLocation?: string,
-  temporalCoverage?: string
-}
-
-interface Painting extends Namespaces {
+interface Painting {
   name?: string
 }
 
-interface Church extends Namespaces {
+interface Church {
   identifier?: string,
-  description?: string,
-  locationName?: string,
-  provinceName?: string
+  provinceURI?: string,
+  provinceName?: string,
+  contentLocationsURIs?: string,
+  contentLocationNames?: string
 }
 
 declare interface ArtworkResponse extends Painting, Church {
   heritageObject: string,
+  description?: string,
   dateCreated?: string,
-  creatorName?: string,
-  imageContentUrl?: string,
-  imageLicense?: string,
-  imageEncodingFormat?: string,
+  imageURI?: string,
+  imageLicenseURI?: string,
+  imageLicenseName?: string,
+  publisherURI?: string,
+  publisherName?: string,
+  publisherHomepage?: string,
+  creators?: string,
+  creatorNames?: string,
 };
 
 declare interface ArtProperties extends Record<string, any> {};
@@ -33,6 +31,7 @@ declare interface Artwork {
   originalId: string,
   categoryId: string,
   title?: string,
+  subTitle?: string,
   description?: string,
   image?: string,
   properties: ArtProperties
