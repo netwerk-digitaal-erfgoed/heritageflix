@@ -9,6 +9,11 @@ export const useQueriesStore = defineStore('queries', () => {
   let apiUrl: string;
   let categoryQuery: string;
   let itemsQuery: string;
+  let disableLinks: string[];
+
+  function getDisableLinks (): string[] {
+    return disableLinks;
+  }
 
   async function getCategoryQuery (limit: number = 1000): Promise<CategoryResponse[]> {
     const query = createQuery(categoryQuery, {
@@ -45,7 +50,8 @@ export const useQueriesStore = defineStore('queries', () => {
     apiUrl = data.baseUrl;
     categoryQuery = data.categoryQuery;
     itemsQuery = data.itemsQuery;
+    disableLinks = Array.isArray(data.disableLinks) ? data.disableLinks : [];
   }
 
-  return { getCategoryQuery, getItemsQuery, loadQueries };
+  return { getCategoryQuery, getItemsQuery, loadQueries, getDisableLinks };
 });
