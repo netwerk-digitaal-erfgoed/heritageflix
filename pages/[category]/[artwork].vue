@@ -10,8 +10,8 @@
         <h2 class="text-2xl" ref="titleElement">{{ currentArtwork?.title }}</h2>
         <div :class="visualizeDescription">{{ currentArtwork?.description }}</div>
       </div>
-      <div class="col-start-8 col-span-4 row-start-9 row-span-4 p-20 pr-0 grid grid-cols-2 h-min gap-y-4">
-        <AtomsPropertyGroup v-for="(prop, name) in currentArtwork?.properties" :key="name" :label="name.toString()" :prop="prop" />
+      <div class="col-start-8 col-span-4 row-start-9 row-span-4 p-8 grid grid-cols-2 h-min gap-y-4">
+        <AtomsPropertyGroup v-for="(prop, name) in currentArtwork?.properties" :key="name" :label="name.toString()" :prop="prop" :groupName="name.toString()"/>
       </div>
       <MoleculesIconNavigation name="arrowRight" :to="navPath()" v-if="state.next" class="col-span-1 flex justify-center items-center row-start-1 row-span-8 col-start-12" />
     </div>
