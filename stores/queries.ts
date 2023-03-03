@@ -9,10 +9,10 @@ export const useQueriesStore = defineStore('queries', () => {
   let apiUrl: string;
   let categoryQuery: string;
   let itemsQuery: string;
-  let linkCreators: boolean
+  let disableLinks: string[];
 
-  function getLinkCreators (): boolean {
-    return !!linkCreators;
+  function getDisableLinks (): string[] {
+    return disableLinks;
   }
 
   async function getCategoryQuery (limit: number = 1000): Promise<CategoryResponse[]> {
@@ -50,8 +50,8 @@ export const useQueriesStore = defineStore('queries', () => {
     apiUrl = data.baseUrl;
     categoryQuery = data.categoryQuery;
     itemsQuery = data.itemsQuery;
-    linkCreators = data.hasOwnProperty('linkCreators') ? data.linkCreators : true;
+    disableLinks = Array.isArray(data.disableLinks) ? data.disableLinks : [];
   }
 
-  return { getCategoryQuery, getItemsQuery, loadQueries, getLinkCreators };
+  return { getCategoryQuery, getItemsQuery, loadQueries, getDisableLinks };
 });

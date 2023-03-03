@@ -16,13 +16,11 @@ const props = defineProps<{
 }>();
 
 const allowLink = computed(() => {
-  const store = useQueriesStore() as any;
-  const fnName = `getLink${useCapitalize(props.groupName)}`;
-
-  if ((typeof store[fnName]) === "function") {
-    return store[fnName]();
-  }
-  return true;
+  // Fetch field names that aren't allowed to be links
+  const disableLinks = useQueriesStore().getDisableLinks();
+  console.warn(disableLinks, props.groupName);
+  // If the groupName isn't in the list, return true
+  return !disableLinks.includes(props.groupName);
 })
 
 const properties = computed(() => {
