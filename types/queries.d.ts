@@ -1,5 +1,6 @@
 declare interface QueryData {
   baseUrl: string,
   categoryQuery: string,
-  itemsQuery: string
+  itemsQuery: string,
+  linkCreators: boolean
 };

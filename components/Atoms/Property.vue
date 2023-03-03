@@ -5,14 +5,16 @@
 
 <script setup lang="ts">
 const props = withDefaults(defineProps<{
+  allowLink: boolean,
   label?: string,
   value?: string
 }>(), {
+  allowLink: true,
   value: ''
 });
 
 const isLink = computed(() => {
-  return useCheckLink(props.value);
+  return props.allowLink && useCheckLink(props.value);
 });
 </script>
 
