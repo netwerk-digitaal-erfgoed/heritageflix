@@ -18,7 +18,6 @@ const props = defineProps<{
 const allowLink = computed(() => {
   // Fetch field names that aren't allowed to be links
   const disableLinks = useQueriesStore().getDisableLinks();
-  console.warn(disableLinks, props.groupName);
   // If the groupName isn't in the list, return true
   return !disableLinks.includes(props.groupName);
 })
