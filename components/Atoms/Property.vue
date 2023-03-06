@@ -1,6 +1,6 @@
 <template>
-  <span v-if="isLink" class="text-sm hover:underline"><NuxtLink :to="value">{{ label }}</NuxtLink></span>
-  <span v-else class="text-sm">{{ value }}</span>
+  <span v-if="isLink && allowLink" class="text-sm hover:underline"><NuxtLink :to="value">{{ label }}</NuxtLink></span>
+  <span v-else class="text-sm">{{ propertyValue }}</span>
 </template>
 
 <script setup lang="ts">
@@ -14,13 +14,15 @@ const props = withDefaults(defineProps<{
 });
 
 const isLink = computed(() => {
-  return props.allowLink && useCheckLink(props.value);
+  return useCheckLink(props.value);
+});
+
+const propertyValue = computed(() => {
+  if (isLink && !props.allowLink) {
+    return props.label;
+  }
+  return props.value;
 });
 </script>
 
-<style scoped lang="scss">
-  .property {
-    display: flex;
-    flex-direction: column;
-  }
-</style>
+<style scoped lang="scss"></style>
