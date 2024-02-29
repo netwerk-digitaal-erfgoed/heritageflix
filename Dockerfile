@@ -8,6 +8,7 @@ RUN npm ci
 RUN npm run generate
 
 FROM nginx:alpine
+LABEL org.opencontainers.image.source = "https://github.com/netwerk-digitaal-erfgoed/heritageflix"
 
 RUN mkdir -p /app
 WORKDIR /app
